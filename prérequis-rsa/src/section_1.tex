@@ -1,0 +1,204 @@
+\section{Arithmétique élémentaire}
+
+\subsection{Divisibilité}
+
+Soient $a,b \in \mathbb{Z}$ avec $b \neq 0$.
+On dit que $b$ divise $a$, et l’on note $b \mid a$, s’il existe $q \in \mathbb{Z}$ tel que
+\[
+a = bq.
+\]
+
+\subsection{Plus grand commun diviseur}
+
+Soient $a,b \in \mathbb{Z}$, non tous deux nuls.
+Le \emph{plus grand commun diviseur} de $a$ et $b$, noté $\operatorname{pgcd}(a,b)$, est l’unique entier naturel vérifiant :
+\begin{itemize}
+  \item $\operatorname{pgcd}(a,b) \mid a$ et $\operatorname{pgcd}(a,b) \mid b$,
+  \item tout diviseur commun de $a$ et $b$ divise $\operatorname{pgcd}(a,b)$.
+\end{itemize}
+
+\subsection{Théorème de Bézout}
+
+\begin{theorem}[Bézout]
+Soient $a,b \in \mathbb{Z}$.
+Il existe des entiers $u,v \in \mathbb{Z}$ tels que
+\[
+au + bv = \operatorname{pgcd}(a,b).
+\]
+\end{theorem}
+
+En particulier,
+\[
+\operatorname{pgcd}(a,b) = 1 \iff \exists u \in \mathbb{Z},\ au \equiv 1 \ (\mathrm{mod}\ b).
+\]
+
+\section{Congruences et anneaux quotient}
+
+\subsection{Congruence modulo $n$}
+
+Soit $n \geq 2$ un entier.
+Deux entiers $a,b$ sont dits congrus modulo $n$ si
+\[
+n \mid (a-b),
+\]
+ce que l’on note
+\[
+a \equiv b \ (\mathrm{mod}\ n).
+\]
+
+Cette relation est une relation d’équivalence sur $\mathbb{Z}$.
+
+\subsection{Anneau $\mathbb{Z}/n\mathbb{Z}$}
+
+L’ensemble des classes de congruence modulo $n$ est noté
+\[
+\mathbb{Z}/n\mathbb{Z}.
+\]
+
+Il est muni de deux lois :
+\[
+\overline{a} + \overline{b} = \overline{a+b}, \qquad
+\overline{a} \cdot \overline{b} = \overline{ab}.
+\]
+
+C’est un anneau commutatif unitaire.
+
+\section{Inversibilité modulo $n$}
+
+\subsection{Caractérisation}
+
+\begin{theorem}
+Soient $a \in \mathbb{Z}$ et $n \geq 2$.
+L’élément $\overline{a} \in \mathbb{Z}/n\mathbb{Z}$ est inversible pour la multiplication
+si et seulement si
+\[
+\operatorname{pgcd}(a,n) = 1.
+\]
+\end{theorem}
+
+\subsection{Groupe multiplicatif}
+
+On définit
+\[
+(\mathbb{Z}/n\mathbb{Z})^{\times}
+=
+\{\, \overline{a} \in \mathbb{Z}/n\mathbb{Z} \mid \operatorname{pgcd}(a,n)=1 \,\}.
+\]
+
+Cet ensemble est un groupe abélien pour la multiplication.
+
+\section{Indicatrice d’Euler}
+
+\subsection{Définition}
+
+On appelle \emph{indicatrice d’Euler} de $n$ l’entier
+\[
+\varphi(n) = \#(\mathbb{Z}/n\mathbb{Z})^{\times}.
+\]
+
+Autrement dit, $\varphi(n)$ est le nombre d’entiers entre $1$ et $n$ premiers avec $n$.
+
+\subsection{Cas particulier}
+
+Si $p$ est premier,
+\[
+\varphi(p) = p-1.
+\]
+
+Si $p$ et $q$ sont deux nombres premiers distincts,
+\[
+\varphi(pq) = (p-1)(q-1).
+\]
+
+\section{Théorème d’Euler}
+
+\begin{theorem}[Euler]
+Soit $n \geq 2$ et $a \in \mathbb{Z}$ tel que $\operatorname{pgcd}(a,n)=1$.
+Alors
+\[
+a^{\varphi(n)} \equiv 1 \ (\mathrm{mod}\ n).
+\]
+\end{theorem}
+
+\section{Exponentiation modulaire}
+
+Pour calculer $a^{k} \ (\mathrm{mod}\ n)$, on utilise l’exponentiation rapide,
+fondée sur la décomposition binaire de $k$ et la réduction modulo $n$ à chaque étape.
+
+La complexité est logarithmique en $k$.
+
+\section{Principe mathématique du chiffrement RSA}
+
+\subsection{Construction des clés}
+
+On choisit deux nombres premiers distincts $p$ et $q$.
+
+On définit
+\[
+n = pq,
+\qquad
+\varphi(n) = (p-1)(q-1).
+\]
+
+On choisit un entier $e$ tel que
+\[
+1 < e < \varphi(n)
+\quad \text{et} \quad
+\operatorname{pgcd}(e,\varphi(n))=1.
+\]
+
+Par le théorème de Bézout, $e$ est inversible modulo $\varphi(n)$.
+On définit $d$ par
+\[
+ed \equiv 1 \ (\mathrm{mod}\ \varphi(n)).
+\]
+
+\subsection{Clés}
+
+\begin{itemize}
+  \item Clé publique : $(e,n)$
+  \item Clé privée : $d$ (ou $(d,n)$)
+\end{itemize}
+
+\section{Chiffrement et déchiffrement}
+
+Soit $m \in \mathbb{N}$ tel que $m < n$.
+
+\subsection{Chiffrement}
+
+\[
+c \equiv m^{e} \ (\mathrm{mod}\ n).
+\]
+
+\subsection{Déchiffrement}
+
+\[
+m' \equiv c^{d} \ (\mathrm{mod}\ n).
+\]
+
+\subsection{Justification mathématique}
+
+Comme $ed \equiv 1 \ (\mathrm{mod}\ \varphi(n))$, il existe $k \in \mathbb{Z}$ tel que
+\[
+ed = 1 + k\varphi(n).
+\]
+
+Si $\operatorname{pgcd}(m,n)=1$, alors par le théorème d’Euler :
+\[
+m^{ed} = m^{1+k\varphi(n)} = m(m^{\varphi(n)})^{k} \equiv m \ (\mathrm{mod}\ n).
+\]
+
+Dans le cas général, la validité repose sur le théorème des restes chinois.
+
+\section{Méthode complète de calcul d’une clé RSA}
+
+\begin{enumerate}
+  \item Choisir deux nombres premiers $p \neq q$.
+  \item Calculer $n = pq$.
+  \item Calculer $\varphi(n) = (p-1)(q-1)$.
+  \item Choisir $e$ tel que $\operatorname{pgcd}(e,\varphi(n))=1$.
+  \item Calculer $d$ à l’aide de l’algorithme d’Euclide étendu.
+  \item Former la clé publique $(e,n)$ et la clé privée $d$.
+\end{enumerate}
+
+
