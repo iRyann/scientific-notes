@@ -1,0 +1,120 @@
+\section{Raisonnement par récurrence}
+Le raisonnement par récurrence est une méthode de démonstration qui fait son apparition au $XVII^e$ siècle dans dans le \textit{Traité du triangle arithmétique} de Blaise Pascal. Le principe de récurrence repose sur le fondement inductif de $\mathbb{N}$ et s'énonce comme suit:
+$$\biggl[\mathcal{P}(0)\wedge\Bigl(\forall n\in\mathbb{N},\bigl(\mathcal{P}(n)\Rightarrow\mathcal{P}(n+1)\bigr)\Bigr)\biggr]\Longrightarrow\bigl(\forall n\in\mathbb{N},\mathcal{P}(n)\bigr)$$
+Autrement dit, \textbf{si} \important{$\boldsymbol{\mathcal{P}(0)}$ est vraie} \textit{(initialisation)} \important{et que} \important{$\boldsymbol{\forall n\in\mathbb{N}}$, si la propriété est vérifiée au rang n, elle l'est aussi au rang suivant} \textit{(hérédité)} ; \textbf{alors,} \important{la propriété est vrai pour tout entier}.
+\subsection{Schéma de preuve}
+On s'attachera à suivre le schéma de preuve suivant:
+\begin{codeb}
+    Démontrons par récurrence sur $n\in\NN$ la propriété $\mathcal{P}(n):" \text{\textit{propriété dépendant de n}} "$
+    \begin{itemize}
+        \item \textit{Initialisation:} Montrons $\mathcal{P}(0)$.
+        \item \textit{Hérédité:} Soit $n\in\NN$, supposons $\mathcal{P}(n).$ Montrons $\mathcal{P}(n+1):" \text{\textit{pte au rang n+1}}"$.
+        \item Ainsi, $\mathcal{P}(0)$ est vraie et pour tout $n\in\mathbb{N},\mathcal{P}(n)$ entraîne $\mathcal{P}(n+1)$. Donc, par principe de récurrence, $\mathcal{P}(n)$ est vraie pour tout $n\in\NN$.
+    \end{itemize}
+\end{codeb}
+\begin{coder}
+    \textbf{Remarques}
+    \begin{itemize}
+        \flch S'épargner une définition explicite de $\mathcal{P}$ peut parfois vous ralentir lors de l'hérédité plus qu'autre chose. D'ailleurs n ne doit pas être quantifié dans celle-ci. 
+        \flch Ne pas oublier de fixer n dans un ensemble de définition convenable avant l'hérédité, en tenant compte du rang de l'initialisation.
+        \flch Une fois rompu à l'exercice, nous serons tenté de rédiger plus brièvement; toutefois, la mention explicite du principe de récurrence et la conclusion de validité pour toute valeur de $\NN$ ne doivent pas être omises. Il ne faut donc pas s'arrêter après avoir montré $\mathcal{P}(n+1)$.
+    \end{itemize}
+\end{coder}
+\begin{exemple}
+Montrons par récurrence pour $n\geq1$, $\mathcal{P}(n): "\sum_{k=1}^{n} k = \frac{n(n+1)}{2}"$
+\begin{itemize}
+    \item \textit{Initialisation (\(n = 1\)):}
+\[ 1 = \frac{1(1+1)}{2} ~~\text{, d'où} ~ \mathcal{P}(1).\] 
+    \item \textit{Hérédité:} Supposons $\mathcal{P}$ pour un entier \(k\geq1\) fixé, i.e., $1 + 2 + 3 + \ldots + k = \frac{k(k+1)}{2}.$
+
+Montrons la propriété au rang suivant:
+\begin{align*}
+1 + 2 + 3 + \ldots + k + (k+1) &= \frac{k(k+1)}{2} + (k+1) \\
+&= \frac{k(k+1) + 2(k+1)}{2} \\
+&= \frac{(k+1)(k+2)}{2} & \text{D'où} ~ \mathcal{P}(k+1).
+\end{align*}
+Ainsi, $\mathcal{P}(1)$ est vraie et pour tout $n\in\NNe,\mathcal{P}(n)$ entraîne $\mathcal{P}(n+1)$. Donc, par principe de récurrence, $\mathcal{P}(n)$ est vraie pour tout $n\in\NNe$.
+\end{itemize}
+\end{exemple}
+\begin{exo}\label[refexo]{exo:0}
+    Considérons $(u_n)_{n\in\NN}\in\NN^{\NN}$ telle que $\begin{cases}
+        u_0=-267\\
+        \forall n\geq0, u_{n+1}=u_n+61
+    \end{cases}$\\[0.3cm]
+    Montrer par récurrence sur $n\in\NN$ la propriété 
+    $
+    \mathcal{P}_n : "u_n=61n-267"
+    $
+\end{exo}
+\begin{exo}\label[refexo]{exo:0bis}
+    Considérons $(u_n)_{n\in\NNe}\in\NN^{\NNe}$ telle que $\begin{cases}
+        u_1=1\\
+        \forall n\geq1, u_{n+1}=\frac{n+1}{n}*u_n
+    \end{cases}$\\[0.3cm]
+    \begin{enumerate}
+        \item Montrer par récurrence sur $n\in\NN$ la propriété 
+    $
+    \mathcal{P}_n : "u_n>0"
+    $.
+        \item De façon subsidiaire, en déduire que $(u_n)$ est décroissante.
+    \end{enumerate}
+
+\end{exo}
+\begin{exo}\label[refexo]{exo:1}
+    Montrer que $\sum_{k=1}^{n}k^2 = \frac{(k+1)(k+2)(2k+3)}{6}$
+\end{exo}
+\begin{exo}\label[refexo]{exo:2}
+    Montrer que $(a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k$
+\end{exo}
+\subsection{D'autres types de récurrence}
+\subsubsection{Récurrence d'ordre 2}
+Lorsqu'on établit une propriété $\mathcal{P}(n)$ qui dépend de $\mathcal{P}(n-1)$ et $\mathcal{P}(n-2)$, alors il faut procéder comme suit:
+\begin{codeb}
+    Démontrons par récurrence sur $n\geq2$ la propriété $\mathcal{P}(n):" \text{\textit{propriété dépendant de n}} "$
+    \begin{itemize}
+        \item \textit{Initialisation:} Montrons $\mathcal{P}(0)$ et $\mathcal{P}(1)$.
+        \item \textit{Hérédité:} Soit $n\in\NN$, supposons $\mathcal{P}(n)$ et $\mathcal{P}(n+1)$ Montrons $\mathcal{P}(n+2):" \text{\textit{pte au rang n+2}}"$.
+        \item Ainsi, $\mathcal{P}(0)$ et $\mathcal{P}(1)$ sont vraies et pour tout $n\in\mathbb{N},\mathcal{P}(n)$ et $\mathcal{P}(n+1)$ entraînent $\mathcal{P}(n+2)$. Donc, par principe de récurrence, $\mathcal{P}(n)$ est vraie pour tout $n\in\NN$.
+    \end{itemize}
+\end{codeb}
+\begin{exemple}
+    Considérons la suite $(u_n)_{n\in\NN}\in\NN^{\NN}$ définie par $u_0=1, u_1=3$ et $\forall n\geq0, u_{n+2} = 4u_{n+1} - 3u_n$. On montre par récurrence d'ordre 2 sur $n\in\NN$ que $u_n = 3^n$.
+\end{exemple}
+\begin{coder}
+    \textbf{Remarque}\\
+    La preuve par récurrence se généralise à l'ordre $k\geq0$
+\end{coder}
+\subsubsection{Récurrence finie}
+Cette récurrence s'établit sur un domaine de définition fini, par exemple $\intervalle{0}{K}$ où $K\in\NN$ est fixé.
+\subsubsection{Récurrence forte}
+On suppose la propriété vraie à tous les rangs précédents pour la montrer à un rang donné. Il suffit d’initialiser sur le premier terme.
+\subsubsection{Récurrences multiples}
+On opère simultanément des récurrences sur plusieurs variables. On imbrique en général les récurrences les unes dans les autres. Attention à bien énoncer les propriétés à démontrer pour chaque récurrence.
+\subsection{Exercices}
+\begin{exo}\label[refexo]{exo:5}
+    Montrer que $\forall n\in \NNe,\sum_{k=0}^{n-1} 2k + 1  = n^2$
+\end{exo}
+\begin{exo}\label[refexo]{exo:6}
+    Soit $a\in\mathbb{R}^+$. Montrer que pour $n\geq1$, 
+    $$ (1 + a)^n \geq 1 + na $$
+\end{exo}
+\begin{exo}\label[refexo]{exo:7}
+    Considérons la suite $(u_n)$ définie par $\begin{cases}u_0=1\\u_{n+1}=\sqrt{1+u_n} & \forall n\in \NN \end{cases}$
+\end{exo}
+\begin{exo}\label[refexo]{exo:8}
+    Montrer pour $n\in\NNe$,
+    $$S_n = \sum_{k=1}^{n} k^3 = 1^3+2^3+\ldots+n^3 = \dfrac{n^2(n+1)^2}{4}$$
+\end{exo}
+\begin{exo}\label[refexo]{exo:9}
+    Considérons les propriétés:
+    \begin{itemize}
+        \item $\mathcal{P}_n :"4^n-1~\text{est divisible par 3}"$
+        \item $\mathcal{Q}_n :"4^n+1~\text{est divisible par 3}"$
+    \end{itemize}
+    \begin{enumerate}
+        \item Montrer que $\mathcal{P}_n$ est héréditaire.
+        \item Montrer que $\mathcal{Q}_n$ est héréditaire.
+        \item Montrer que $\mathcal{P}_n$ est vraie sur un domaine qu'on explicitera.
+        \item Que dire de $\mathcal{Q}_n$?
+    \end{enumerate}
+\end{exo}

@@ -1,0 +1,221 @@
+\section{Évolution d'un système chimique}
+\begin{frame}{Caractéristiques d'une réaction}
+    On s'intéresse ici à l'évolution des composants d'une réaction chimique.
+    \pause
+    \begin{block}{Définitions}
+        \begin{enumerate}
+            \item \textbf{Réactif}: On appelle réactif une espèce chimique présente à l'état initial, vouée à être consommée.
+            \item \textbf{Produit}: Espèce chimique formée au cours de la réaction à partir des réactifs.
+            \end{enumerate}
+    \end{block}
+    \pause
+    Lors d'une transformation chimique, on quantifie l'évolution du système par \couleur{l'évolution des quantités de matières des espèces chimiques}.
+    \pause
+    \begin{itemize}
+        \flch La quantité de matière des réactifs diminue.
+        \flch La quantité de matière des produits augmente.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Loi fondamentale\esp}
+    \begin{block}{Principe de Lavoisier}
+        Au cours d'une réaction chimique, la masse se converse. De fait, la conservation de la matière implique:
+        \begin{itemize}
+            \flch conservation du nombre d'atomes de chaque élément chimique ;
+            \flch conservation de la charge globale.
+        \end{itemize}
+    \end{block}
+    En conséquence de quoi, la réaction est modélisée par une équation de conservation qui met en jeu les réactifs et les produits. 
+\end{frame}
+\subsection{Nombres stoechiométrique}
+\begin{frame}{Coefficients stoechiométriques}
+    Les \couleur{coefficients stoechiométriques} permettent d'équilibrer les espèces chimiques de la réaction. Ils indiquent donc leurs proportions.\\
+    \begin{block}{Notation}
+        De façon générale, une équation réactionnelle suivra la notation forme suivante:\\
+        $$\alpha_1 A_1+...+\alpha_k A_k \rightleftarrows \alpha_{k+1} A_{k+1}+...+\alpha_n A_n$$
+        où les $\alpha_i$ sont les c.s et $A_i$ les espèces chimiques.
+    \end{block}
+\end{frame}
+\begin{frame}{Exemple}
+    Considérons une transformation chimique:
+    \only<1>{
+    $$\underbrace{\textcolor{briqueRouge}{\alpha}N_2_{(g)} + \textcolor{briqueRouge}{\beta} H_2_{(g)}}_{\text{réactifs}}= \underbrace{\textcolor{briqueRouge}{\gamma} NH_3_{(g)}}_{\text{produit}}$$
+    \textbf{\couleur{Déterminer les nombres stoechiométriques.}}
+    }
+    \only<2->{
+    $$\underbrace{N_2_{(g)} + 3 H_2_{(g)}}_{\text{réactifs}}= \underbrace{2 NH_3_{(g)}}_{\text{produit}}$$
+    }
+    
+\end{frame}
+\begin{frame}{Méthode\esp}
+    Pour équilibrer une équation chimique, on procède comme suit:
+    \only<1>{
+    \begin{itemize}
+        \flch De tête, lorsque l'équation est simple
+        \flch algébriquement, lorsque ça n'est pas évident.
+    \end{itemize}
+    }
+    \only<2->{
+    \begin{enumerate}
+        \item On identifie dans l'énoncé les différentes espèces et leur rôle.
+        \pause
+        \item On pose l'équation chimique: $C_6H_{12}O_6 + O_2 = CO_2 + H_2O$
+        \pause
+        \item On porte une variable algébrique sur chaque réactif ou produit:
+         $$\textbf{a}C_6H_{12}O_6 + \textbf{b}O_2 = \textbf{x}CO_2 + \textbf{y}H_2O$$
+         \vspace*{-0.5cm}
+        \pause
+        \item On exprime le nombre d'atomes de nature différente:
+        $$\left\lbrace \begin{array}{ll}
+        C: & 6a = x\\
+        H: & 12a = 2y\\
+        O: & 6a + 2b = 2x + y
+        \end{array}\right.
+        $$
+        \pause
+        \item Dans le cas présent, on pose une valeur arbitraire pour une des variables, ce qui permettra de résoudre le système d'équations.
+    \end{enumerate}
+    }
+\end{frame}
+\begin{frame}{Méthode\esp}
+    \remarque{Remarque: Si on obtient des coefficients fractionnaires, on détermine un dénominateur commun et on multiplie chacun des coefficients par celui-ci.}\\[0.5cm]
+    Ici, en posant \textbf{a=1}, on obtient:
+    $$C_6H_{12}O_6 + \textbf{6}O_2 = \textbf{6}CO_2 + \textbf{6}H_2O$$
+\end{frame}
+\begin{frame}{Exercice\esp}
+    Équilibrer les équations suivantes:
+    \begin{enumerate}
+        \item $NH_3 + O_2 \rightarrow NO + H_2O$
+        \item $CO + Fe_3O_4 \rightarrow CO_2 + Fe	$
+        \item $Cu_2S + Cu_2O \rightarrow Cu + SO_2$
+        \item $CH_4 + H_2O \rightarrow CO_2 + H_2	$
+    \end{enumerate}
+    \label{exo1}
+\end{frame}
+\begin{frame}{Nb. sto. algébriques}
+    Les \textbf{\couleur{coefficients stoechiométriques algébriques}}, notés $\nu_i$, des différentes espèces chimiques $A_i$ intervenant dans la réaction sont :
+    $$\nu_i = \begin{cases}
+-\alpha_i & \text{si } A_i ~\text{est un réactif}\\
+\alpha_i & \text{si } A_i ~\text{est un produit}\\
+\end{cases}$$
+Dans le cas précédent, on aurait:
+\begin{center}
+\begin{minipage}{0.4\textwidth}
+    $\underbrace{N_2_{(g)} + 3 H_2_{(g)}}_{\text{réactifs}}= \underbrace{2 NH_3_{(g)}}_{\text{produit}}$
+\end{minipage}
+\begin{minipage}{0.3\textwidth} 
+    \begin{itemize}
+        \item $\nu(NH_3) = +2$
+        \item $\nu(N_2) = −1$
+        \item $\nu(H_2) = −3$
+    \end{itemize}
+\end{minipage}
+\end{center}
+\end{frame}
+\subsection{Avancement}
+\begin{frame}{Avancement\esp}
+    Lorsque les réactifs sont tous épuisés, on dit que que \important{la réaction est totale}. Dans ce cas, les éléments sont en \important{conditions stoechiométriques}
+    $$\forall i,j\in[1..n]^{2}, ~\frac{c_i}{\alpha_i}=\frac{c_j}{\alpha_j}~,~\text{où}\begin{cases}
+        c_i & \text{concentration de}~A_i\\
+        \alpha_i & \text{coeff. sto. de}~A_i
+    \end{cases}$$
+    \pause
+    Dans le cas contraire, il est nécessaire d'introduire \important{$x$, l'avancement de la réaction},\remarque{(aussi noté $\xi$)}, qui permet de quantifier en mol la quantité de matière consommée par un réactif ayant un coef. sto. égal à 1.\\[0.5cm]\pause
+    Ainsi, au début de la réaction : $x(0) = 0$, et il est relié de façon générale au nombre de moles $n_i(t)$ à l’instant $t$ de l’espèce chimique $A_i$ par :
+    \vspace*{-0.8cm}
+    \begin{equ}[!ht]
+      \begin{equation}
+        n_i(t) = n_i(0) + \nu_i*x(t)
+      \end{equation}
+    \caption{}
+    \label{eq1}
+    \end{equ}
+    
+\end{frame}
+\begin{frame}{Exemple\esp}
+    Considérons la réaction: ${N_2}_{(g)} + 3 {H_2}_{(g)}= 2{NH_3}_{(g)}$ en supposant qu'à l'état initial, on a une quantité $n_0$ d'azote et de dihydrogène et qu'aucun des produit n'est présent.\pause
+    
+    \begin{table}
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+             & ${N_2}_{(g)}$ & ${H_2}_{(g)}$ &${NH_3}_{(g)}$\\
+             \hline\hline
+             $t=0$& $n_0$ & $n_0$ & 0\\
+             \hline
+             $t>0$& $n_0-x(t)$ & $n_0-3x(t)$ & $2x(t)$\\
+             \hline
+        \end{tabular}
+        \caption{Tableau d'avancement}
+        \label{tab:my_label}
+    \end{table}
+    \pause
+    De fait, si on s'intéresse à $n_{N_2}$ au cours du temps, on a bien:
+    \begin{align}
+n_{N_2}(t) 
+& = n_{N_2}(0) + \nu_{N_2}*x(t) \label{q:1:1}\\
+& = n_{N_2}(0) + (-1)*x(t)
+\end{align}
+\footnotesize{\remarque{Remarque: Dans \eqref{q:1:1}, on utilise la formule générale \eqref{eq1}}}
+\end{frame}
+\begin{frame}{Avancement maximal\esp}
+    \begin{block}{Caractérisation}
+        Valeur maximale de $x$, que l’on peut noter $x_{max}$. On la calcule en imposant que les quantités de matière de tous les réactifs soient positives ou nulles.
+    \end{block}
+    \pause \textbf{Exemple}:
+    Considérons la réaction {\small
+    $C_3H_8_{(g)} + 5O_2_{(g)} = 3 CO_2_{(g)} + 4 H_2O_{(l)}$}
+    et notons {\small$n_1, n_2$} les quantités de matières de respectivement {\small$C_3H_8$} et {\small$O_2$}. \pause Par définition,
+    $$n_1 - x \geq 0 ~et~ n_2 - 5x \geq 0$$
+\pause donc
+$$x \leq n_1 ~et~ x\leq \frac{n_2}{5}$$
+\pause Dans ce cas on peut poser $x_{max}$ = min\{$n_1$,$\frac{n_2}{5}$\}; et donc, 
+$$\forall t,~0\leq x(t)\leqx_{max}$$
+\end{frame}
+\begin{frame}{Avancement final\esp}
+    Lorsque \textbf{la transformation chimique est terminée}, les quantités de matière n’évoluent plus et $x$ prend sa valeur finale $x_f$ : c’est l’\important{avancement final}.\\
+    \pause
+    On distingue alors deux types de réactions:
+    \begin{enumerate}
+        \item Les \important{réactions totales ($x_f=x_{max}$)}\\
+        Dans ce cas, la réaction est se poursuit jusqu’à la disparition d’un
+des réactifs, appelé \textit{réactif limitant}. La transformation chimique se note à l’aide d’une flèche $\rightarrow$ pour indiquer qu’elle est totale.
+    \pause
+    \item Les \important{réactions limitées ($x_f<x_{max}$)}\\
+    Dans ce cas, la réaction aboutit à un état final où coexistent tous
+les réactifs et les produits. On dit qu’il y a équilibre chimique. Une réaction limitée est la superposition de deux réactions totales en sens
+inverse. Ce faisant, des produits sont consommés au fur et à mesure qu'ils sont créés pour reformer des réactifs.
+    \end{enumerate}
+\end{frame}
+\subsection{Bilan}
+\begin{frame}{}
+    \begin{itemize}
+        \item Les quantités initiales ne dépendent pas des coefficients stoechiométriques.
+        \item Le tableau d'avancement permet de suivre l'évolution système, mais surtout de connaître l'état final.
+    \end{itemize}
+    
+    \begin{table}
+        \centering
+        \begin{tabular}{|c|c||c||c|}
+            \hline
+             & $A_1$ \remarque{(\footnotesize réactif)} & ... & $A_n$ \remarque{(\footnotesize produit)} \\
+             \hline
+             $t=0$ & ${n_1}_{initial}$& ... & ${n_n}_{initial}$ \\
+             \hline
+             $t_{final}$ & ${n_1}_{initial}-\alpha_1x_{max}$ & ... & ${n_n}_{initial} + \alpha_nx_{max}$\\
+             \hline
+        \end{tabular}
+        \caption{Tableau d'avancement}
+        \label{tab:my_label}
+    \end{table}
+    \begin{itemize}
+        \item Si la réaction est totale, et que tous les réactifs sont épuisés, les espèces chimiques sont présentes en conditions stoechiométriques. On parle de mélange stoechiométriques.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Exercice\esp}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{src/img/image1.png}
+        \caption{Exercice - LLS}
+        \label{lls1}
+    \end{figure}
+\end{frame}

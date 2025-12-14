@@ -1,0 +1,16 @@
+\begin{minted}{ocaml}
+    # type 'a ref = { mutable contents: 'a };;
+    type 'a ref = { mutable contents : 'a; }
+    # let ( ! ) r = r.contents;;
+    val ( ! ) : 'a ref -> 'a = <fun>
+    # let ( := ) r newval = r.contents <- newval;;
+    val ( := ) : 'a ref -> 'a -> unit = <fun>
+\end{minted}\begin{minted}{mintedocaml}
+    # type 'a ref = { mutable contents: 'a };;
+    type 'a ref = { mutable contents : 'a; }
+    # let ( ! ) r = r.contents;;
+    val ( ! ) : 'a ref -> 'a = <fun>
+    # let ( := ) r newval = r.contents <- newval;;
+    val ( := ) : 'a ref -> 'a -> unit = <fun>
+\end{minted}
+

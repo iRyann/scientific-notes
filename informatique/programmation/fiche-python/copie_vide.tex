@@ -1,0 +1,340 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+
+%%%%%%%%%%%%%%%%%%%%%% LES PACKAGES
+\input{packages_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%% MISE EN FORME
+\input{mise_en_forme_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LA PALETTE DE COULEURS
+\input{palette_aef.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES COMMANDES 
+\input{commandes_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES "BOITES"
+\newenvironment{s}{%
+  \thmbox[M]{\textbf{Syntaxe}}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{df}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Définition:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{rp}[1]{%
+  \thmbox[M]{\textbf{Rappel:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+\PassOptionsToPackage{svgnames}{xcolor}
+
+\usepackage{tcolorbox}
+
+
+
+\renewcommand*\contentsname{Sommaire}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{fancy} %active les pieds de pages
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+
+\ssection{Python : Attendus au programme}
+\vspace*{0.5cm}
+\section*{Traits généraux}
+\subsection*{Le typage dynamique}
+Au contraire des langages comme le C/C++, qui eux sont à typage statique, le Python associe aux objets un type à la volée, lors de l'exécution du code. C'est ce qu'on appelle le \textbf{typage dynamique}.\\
+Affecter un type aux différents objets permet de leur allouer respectivement un taille adéquate dans la mémoire.\\
+\begin{rp}{Nommer des objets}
+    Un notation d'affectation peut commencer par:
+    \begin{itemize}
+        \item Une lettre (min,MAJ)
+        \item Un underscore (\_)
+    \end{itemize}
+    et peut contenir des entiers.\\
+    \warning ~ Elle ne peut pas commencer par un entier. Ex: "5Id\_Min" n'est pas valide.
+\end{rp}
+Lors de l'exécution du code, l'interpréteur:
+\begin{itemize}
+    \item Caractérise l'objet et y accorde une place en mémoire dans l'espace des objets
+    \item Ajoute la dénomination de celui-ci dans l'espace des variable
+    \item Crée la référence entre les deux
+\end{itemize}.
+\begin{s}
+    \begin{itemize}
+        \flch \textbf{del (Variable)} supprime la variable dans la mémoire.
+        \flch \textbf{type(Objet/Variable)} retourne le type du paramètre donné.
+    \end{itemize}
+\end{s}
+En Python, il n'est pas nécessaire de munir les arguments d'une fonction de leur type; toutefois par soucis de lisibilité et pour déboguer, cela peut s'avérer pratique. 
+
+\begin{minted}{python}
+def f( x : int) -> int :
+# Hyp: Aucune ici
+# Retourne x²
+    return x**2
+\end{minted}
+\noindent
+\subsection*{Portée lexicale} 
+Lorsqu’une expression fait référence à une variable à l’intérieur d’une fonction, Python
+cherche la valeur définie à l’intérieur de la fonction et à défaut la valeur dans l’espace global du module.\\
+\subsection*{Appel de fonction par valeur}
+L’exécution de f(x) évalue d’abord x puis exécute f avec la valeur calculée.
+\begin{df}{Passage par valeur}
+    Le passage d'un paramètre par valeur copie la valeur du paramètre dans une variable locale à la fonction.
+\end{df}
+
+\begin{df}{Passage par référence}
+    Une variables est passée par référence lorsque l'on donne l'adresse de celle-ci en argument de la fonction. Dès lors, on agit concrètement sur la variable, même à l'intérieur de la fonction.
+\end{df}
+\vspace*{0.3cm}
+\warning ~ A la différence du C où l'on peut utiliser des pointeurs afin de passer les objets par référence ; en python, il faut distinguer ceux qui sont de type \textbf{mutable} ou non.
+\begin{df}{Variable non mutable}
+    Une variable de type non mutable ne peut être modifiée. Une opération sur une variable de ce type entraîne nécessairement la création d’une autre variable du même type, même si cette dernière est temporaire.
+\end{df}
+
+\begin{minted}{python}
+x=2         # On déclare une variable de type int
+f(2)=4      # On opère à partir de celle-ci
+print(x)    # On regarde si x a été modifiée
+>> 2
+\end{minted}
+Ainsi on donne une qualification des différentes types ci-dessous :
+\begin{center}
+    \begin{tabular}{c|c}
+    Mutables & Non mutable \\
+     Ensemble, Liste, Dictionnaire & Tuple, Int, Float, Bool, Frozenset
+\end{tabular}
+\end{center}
+\newpage
+\section*{Types de base}
+\subsection*{Type int / float}
+Affecter un entier à une variable initialise celle-ci avec un type \textbf{int}. Lui affecter un réel au format "x.y" lui donne un type \textbf{float}. On donne les opérations suivantes sur les entiers :
+
+\vspace*{0.5cm}
+\begin{center}
+    \begin{tabular}{|c|c|}
+\hline
+    +  - & Addition, soustraction\\ \hline
+    +=  -= & Addition, soustraction et affectation\\\hline
+    *  /& Multiplication, division\\\hline
+    *=  /=  & Multiplication, division et affectation\\ \hline
+     // & Division entière \\\hline
+    \% & Modulo \\\hline
+    
+\end{tabular}
+\end{center}
+
+\begin{s}
+    \textbf{float(objet)}  Converti l'objet en réel.\\
+    \textbf{int(objet)} Converti l'objet en entier. \\
+    \warning ~ Parfois il faut avoir recours à des transtypages en amont ; comme dans le cas str -> float -> int où la la chaine de caractère vaut par exemple "3.5".
+\end{s}
+\subsection*{Type bool}
+\begin{s}
+    True, False\\
+    not, and , or\\
+    ==, !=, <, >, <=, >=.
+
+\end{s}
+\textbf{Evaluation paresseuse:} sur un test if (cond1) and (cond2):, on détermine d’abord le résultat du premier test. S’il est faux, le second n’est
+pas évalué. C’est notamment utile lorsqu’on doit vérifier que l’indice dans un tableau est acceptable. Si L est un tableau
+de taille n, pour s’assurer qu’on n’aura pas d’erreur Index out of range, on peut utiliser : if (i<n) and (L[i]...)
+.\\
+
+\section*{Type structuré}
+\subsection*{Structures indicées immuables}
+\begin{center}
+    \begin{tabular}{c|c|c}
+        & Chaîne & N\_uplet \\
+         Type & str & tuple \\
+         Accès & s[i] & t[i]
+    \end{tabular}
+\end{center}
+\begin{df}{Séquence}
+    Un objet séquentiel ou séquence est une collection itérable, ordonné et indexable. Les objets séquentiels sont les listes, les chaînes de caractères, les objets de type range, ainsi que les tuples (cf. plus bas).\\
+    Ie. on peut faire une boucle dessus, chaque élément est indicé, et la création de la séquence détermine l'ordre des objets dans la collection
+\end{df}
+
+\newpage
+\subsection*{Listes}
+\subsubsection*{Initialisation}
+\begin{s}
+    \textbf{[\textit{e} for \textit{x} in \textit{s}]}, où \textit{e} est une expression, \textit{x} une variable à valeur dans \textit{s}\\
+    \textbf{[$x_0$] * \textit{n}}, où $x_0$ est la valeur d'initialisation d'une liste de taille \textit{n} \\
+    \textbf{liste.append()}\\
+    \textbf{list(range(début, fin, pas))} où range génère des entiers de début à fin selon le pas donné
+\end{s}
+\
+
+\subsubsection*{Méthodes}
+\textbf{Indiçage}
+\begin{minted}{python}
+                      ["A", "B", "C", "D", "E", "F"]
+    #indice positif :   0    1    2    3    4    5
+    #indice négatif :  -6   -5   -4   -3   -2   -1
+
+\end{minted}
+\textbf{Opérations}
+\vspace*{0.3cm}
+\begin{s}
+    \textbf{sum(), min(), max(), del(liste[i]), list.insert(i, x)}\\
+    \textbf{list.pop([i])} : Enlève de la liste l'élément situé à la position indiquée et le renvoie en valeur de retour. Si aucune position n'est spécifiée, \textbf{list.pop()} enlève et renvoie le dernier élément de la liste\\
+    \textbf{list.sort()} ordonne les éléments, \textbf{list.sorted()} le fait en renvoyant une nouvelle liste et en ne modifiant par la première\\
+    \textbf{list.reverse} inverse l'ordre de la liste
+\end{s}
+\textbf{Usage}
+\vspace*{0.3cm}
+\noindent
+\\On peut implémenter les piles à l'aide de liste, en utilisant les méthodes: \textbf{list.append() / list.pop()}\\
+On peut implémenter les files en utlisant le module \mintinline{python}{from collections import deque}.\\
+\begin{s}
+    \textbf{list.popleft()} pour défiler et
+    \textbf{list.append()} pour enfiler
+\end{s}
+\subsection*{Chaînes,Tuples \& Listes : Opérations communes}
+\vspace*{0.3cm}
+\begin{s}
+    \textbf{len(objet)} retourne la taille de l'objet\\
+    \textbf{+} opérateur de concaténation\\
+    \textbf{*} opérateur d'itération\\
+    \textbf{obj[n,m]} extraction par tranche. On utilise \textbf{:} pour "aller jusqu'au bout"\\
+    \textbf{enumerate(objet)} permet d'itérer sur (position, élément) (Hors programme)\\
+    \textbf{zip($obj_1,obj_2,...$)} permet d'itérer sur plusieurs séquences en même temps
+\end{s}
+\subsubsection*{Exercice}
+Créer deux listes, nom et âge, pour 4 individus et afficher "X à Y ans" à l'aide d'une seule boucle.
+\newpage
+\subsection*{Type ensemble}
+\begin{minted}{python}
+    #Créer un ensemble vide
+    E=set()
+    
+    # On crée un ensemble à partir d'une liste
+    liste = [1, 2, 3, 4, 2, 5]
+    nb_set = set(liste)
+
+    # Ajouter un élément
+    E.add(5)
+    E.update(liste) # On peut remplacer liste par tout objet convertible en ensemble
+
+    # On peut créer un ensemble par compréhension
+    a = {x for x in 'abracadabra' if x not in 'abc'}
+    # Sortie : a={'r', 'd'}
+
+\end{minted}
+\noindent
+ On peut convertir en ensemble : un tuple, une chaine de caractère etc... ou-bien un dictionnaire, un ensemble ainsi qu'un itérrable.
+\vspace*{0.5cm}
+\begin{s}
+    \textbf{\&} fait l'intersection, \textbf{|} fait l'union, \textbf{-} fait la différence,\textbf{\^} fait la différence symétrique\\
+    \textbf{set.remove(elem)} retire eleme de set, erreur sinon\\
+    \textbf{set.clear()} vide set\\
+    \textbf{set.copy()}
+\end{s}
+\vspace*{0.5cm}
+\begin{rp}
+    \textbf{\{\}} ne crée pas un ensemble vide, mais un dictionnaire !
+\end{rp}
+\subsubsection{Exercice}
+Créer $\{n\in[0..20]\cap2\mathbb{N}\}$ d'au moins trois manière différentes ; en au plus trois lignes de code. 
+\subsubsection{Exercice}
+Créer l'ensemble des entiers jusqu'à 20 ; puis, y retrancher les entiers impairs.\\
+Procéder à un affichage.\\
+
+
+\newpage
+\subsection*{Dictionnaire}
+Lorsque les listes ne se révèlent pas suffisamment efficientes pour traiter un ensemble de données, on peut avoir recourt aux dictionnaires.
+\begin{df}{Dictionnaire}
+    Ensemble de données au format \textbf{Clé -> Valeur} où à la clé est un identifiant unique repérant la valeur qu'il indexe. Subséquemment, les clés sont des objets non mutables, comme les entiers, les chaînes de caractères ou encore les n\_uplets d'objets eux-mêmes non mutables.
+\end{df}
+\subsubsection*{Exemple}
+\mintinline{python}{animal = {"nom": "singe", "poids": 70, "taille": 1.75}
+}
+\subsubsection*{Opérations \& Méthodes}
+\begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+        \item Accéder à un élément à partir de sa clé:\\
+        \mintinline{python}{dico[clé]}
+        \item Ajouter un élément dans le dictionnaire:\\
+        \mintinline{python}{dico[new_clé]=élément}
+        \item Supprimer un élément du dictionnaire:\\
+        \mintinline{python}{del dico[clé]}
+        \item Tester la présence d'une clé:\\
+        \mintinline{python}{clé in dico #Renvoie True/False}
+    \end{itemize}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+        \item Obtenir la liste des clés:\\
+        \mintinline{python}{dico.keys()}
+        \item Obtenir la liste des valeurs:\\
+        \mintinline{python}{dico.values()}
+        \item Obtenir la liste des clés,valeurs:\\
+        \mintinline{python}{dico.items()}
+        \item Obtenir la valeur indexée par une clé:\\
+        \mintinline{python}{dico.get(clé)}
+    \end{itemize}
+\end{minipage}
+\vspace*{0.5cm}
+\begin{tcolorbox}[title=Manipulation des méthodes]
+Les méthodes \textbf{.keys() .values() .items()} sont intérables, mais pas indexables.\\
+Ainsi, l'instruction \mintinline{python}{dico.keys()[i]} produit une erreur.
+\end{tcolorbox}
+\begin{itemize}
+    \item Trier par clés: \mintinline{python}{sorted(dico)}
+    Retourne la liste triée des clés.
+    \item Trier par valeurs: \mintinline{python}{sorted(dico,key=dico.get)}
+    Retourne la liste des clés triées relativement à l'ordre sur les valeurs,\textbf{ si tant est que cela soit possible} \warning
+    \item Obtenir la clé de la valeur max \mintinline{python}{max(dico, key=dico.get)}, respectivement min.
+    \item Convertir un objet séquentiel contenant d'autres objets séquentiels de 2 éléments : \mintinline{python}{dict(objet)}
+\end{itemize}
+
+\subsubsection*{Complexité: comparatif Liste/Dictionnaire}
+\begin{itemize}
+    \item Le test d’appartenance est en O(1) pour un dictionnaire, alors qu’il peut être en O(n) pour une liste.
+    \item Les temps d’accès à un élément donné est en O(1) pour les deux.
+    \item Le temps de suppression d’un élément est en O(1) pour un dictionnaire et en O(n) pour une liste (sauf si c’est le dernier
+élément qu’on retire avec pop())
+\end{itemize}
+
+
+\newpage
+\section*{Exercices}
+\subsection{Les bases}
+\subsubsection{Opérations simples sur les listes}
+Étant donné une liste une liste d'entiers ; implémenter les fonctions suivantes :
+\begin{itemize}
+    \item appartient\_L(l : list, x : int) -> bool
+    \item position(l : list, x : int) -> int
+    \item nb\_occurences(l : list, x : int) -> int
+    \item max\_L(l : list) -> int
+\end{itemize}
+\subsubsection{Traitement du langage}
+Étant donné deux mots, u et v tels que $|u|\leq|v|$, implémenter la fonction nb\_occ\_motif qui retourne le nombre d'occurence de u dans v.
+\subsection{kNN}
+Implémenter l'algorithme des k plus proches voisins à partir du fichier .py donné en suivant les étapes ci-dessous:
+\begin{itemize}
+    \item Initialiser une liste de N abscisses (X) aléatoires dans [0..60]. De même pour les ordonnées (Y), aléatoirement générées dans [0..60].
+    \item Initialiser S avec un couple de coordonnées aléatoirement tirées dans [0..60]x[0..60].
+    \item Procéder au partitionnement spatial des coordonnées en initialisant Tc, le tableau des coordonnées (abs,ord), par la même occasion. Cette étape donne lieu au remplissage de Classe.
+    \item Implémenter la fonction \mintinline{python}{dist(a:tuple, b:tuple)} qui retourne la distance euclidienne.
+    \item Implémenter la fonction \mintinline{python}{k_NN( k : int , T : list, s : tuple, n : int) -> int}\\
+    On implémentera l'ensemble des k sommets les plus proches de S par un dictionnaire, où les clés seront les sommets indexé par [1..N] et les valeurs la distance \mintinline{python}{dist(S,T[i])}. Ceci permettra d'utiliser les fonctions vues précédemment, notamment pour la recherche de l'argmax.
+    
+\end{itemize}
+
+\end{document}

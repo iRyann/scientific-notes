@@ -1,0 +1,330 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%% LES PACKAGES
+\input{packages_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%% MISE EN FORME
+\input{mise_en_forme_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LA PALETTE DE COULEURS
+\input{palette_aef.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES COMMANDES 
+\input{commandes_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES "BOITES"
+\newenvironment{s}{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Syntaxe}}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+\newenvironment{pte}{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Propriété}}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{df}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Définition:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{rp}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Rappel:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+
+\newenvironment{rem}[1]{%
+  \vspace*{#1 cm}
+  \thmbox[S,underline=false,hskip=0.4cm]{\textbf{Remarque}}%
+  \hspace*{-1.5em}\slshape\normalfont\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+\PassOptionsToPackage{svgnames}{xcolor}
+
+\usepackage[most]{tcolorbox}
+%%%%%%%%%%%% tcolor box %%%%%%%%%%
+
+\newtcolorbox{code}{
+enhanced,
+boxrule=0pt,frame hidden,
+borderline west={4pt}{0pt}{briqueRouge},
+colback=black!3!white,
+sharp corners
+}
+
+\newtcolorbox{codeb}{
+enhanced,
+boxrule=0pt,frame hidden,
+borderline west={4pt}{0pt}{vertdEau},
+colback=black!3!white,
+sharp corners
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setmintedinline{bgcolor={}}
+
+\renewcommand*\contentsname{Sommaire}
+\renewcommand{\listoflistingscaption}{Liste de Code de programme}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{fancy} %active les pieds de pages
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{couv}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\bgroup
+\fancypagestyle{plain}{%
+ \fancyhf{}%
+ \renewcommand{\headrulewidth}{0pt}}%
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\egroup 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{Sections/section1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Types composés}
+\subsection{Les structures}
+Une structure est une collection finie d'objets de types quelconques, indexable. On accède aux éléments de la structure, appelés champs, par le biais de leur identificateur. La déclaration d'une structure est équivalente à la déclaration d'un nouveau type.
+\subsubsection{Définition}
+La définition d'une structure suit la syntaxe suivante:
+\begin{minted}{c}
+struct identificateur{
+    type_1 id_1;  // Champ 1 de type 1
+    ...
+    type_n id_n;  // Champ n de type n 
+};
+\end{minted}
+\begin{code}
+    \dangersign[3ex] On veillera à ne pas oublier le \mintinline{c}{;} à la fin de la déclaration afin d'éviter une erreur de compilation. De plus, une structure ne peut pas comporter plus de cent vingt-sept membres.
+\end{code}
+\subsubsection{Instanciation}
+Pour instancier une structure précédemment définie:
+\vspace*{0.25cm}
+\begin{center}
+\begin{minipage}{0.55\textwidth}
+\begin{itemize}
+    \item[] \mintinline{c}{struct identificateur nom;}
+    \item[] \mintinline{c}{struct identificateur nom={v_1,...,v_n};}
+    \item[] \mintinline{c}{nom.champ_1=valeur;}
+    \item[] \mintinline{c}{nom.champ_1}
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{itemize}
+    \flch déclaration
+    \flch initialisation séquentielle
+    \flch initialisation de champ
+    \flch accès la valeur d'un champ
+\end{itemize}
+\end{minipage}
+\end{center}
+\begin{codeb}
+    \textbf{Remarque}\\
+    Il ne faut pas confondre la déclaration comme \emph{définition} d'une structure ; et la déclaration d'une \emph{instanciation} de celle-ci.
+\end{codeb}
+\subsection{Les énumérations}
+\subsection{Les unions}
+\subsection{Les tableaux}
+Un tableau est une structure de donnée contenant des éléments homogènes (\ie de même type), indexable. 
+\subsubsection{Déclaration}
+En C, les tableaux sont des objets statiques, et possèdent donc une taille fixée lors de leur déclaration.
+\begin{code}
+    \dangersign[3ex] Afin d'accéder aux éléments, ou de parcourir le tableau, il est primordial de connaître la taille de celui-ci afin de ne pas provoquer d'erreur de segmentation en tentant d'accéder à une zone mémoire non attribuée. En conséquence de quoi, \textbf{une déclaration de tableau est toujours précédée par l'initialisation d'une variable indiquant sa taille}.
+\end{code}
+\subsubsubsection{Déclaration seule}
+\begin{center}
+    \mintinline{c}{type identificateur[taille];}
+\end{center}
+
+\begin{minipage}{0.4\textwidth}
+   \begin{itemize}
+       \flch \mintinline{c}{type} est le type des éléments du tableau
+   \end{itemize}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{itemize}
+    \flch \mintinline{c}{taille} est le nombre d'éléments que peut contenir au plus le tableau \mintinline{c}{identificateur}
+\end{itemize}
+\end{minipage}
+\subsubsubsection{Déclaration et initialisation}
+Lorsque les éléments du tableau sont à valeur dans un ensemble explicite de taille raisonnable, il est possible d'initialiser celui-ci dès la déclaration:
+\begin{center}
+    \mintinline{c}{type identificateur[N]={e1,...,eN};}
+\end{center}
+\begin{codeb}
+    \textbf{Remarque}\\
+    Il est possible de procéder à des initialisations sélectives, ainsi que d'omettre la taille du tableau en laissant le soin au compilateur de déterminer celle-ci en fonction de la position du dernier éléments. Toutefois, cela ne semble pas être des pratiques de programmation judicieuses.
+\end{codeb}
+
+\noindent Si on souhaite copier un tableau tab2 préalablement défini et initialisé. L'instruction \mintinline{c}{tab1=tab2} n'agira pas comme on le souhaite. En réalité, \textbf{les tableaux sont des adresses mémoire sur la première valeur stockée du dit tableau}. Ainsi, lors de la précédente instruction, vous avez simplement crée une autre variable permettant d'accéder au \textbf{même tableau}.
+\begin{code}
+ \dangersign[3ex] Il est impossible de copier un tableau à partir d'un autre en réalisant seulement une affectation. Pour ce faire, il faut copier un à un les éléments.
+\end{code}
+\begin{minted}{c}
+for (i = 0; i < N; i++){
+    tab1[i] = tab2[i];
+}
+\end{minted}
+\subsubsection{Accès aux valeurs}
+Les tableaux sont indicés par $[\![0;N-1]\!]$ où $N$ est la taille du tableau. On accède à la $i^{ème}\in [\![0;N-1]\!]$ case du tableau avec l'instruction:
+\begin{center}
+    \mintinline{c}{identificateur[i]}
+\end{center}
+\subsubsection{Tableaux multidimensionnels}
+Sur le même principes que les tableaux à une dimensions, les tableaux multidimensionnels se déclarent comme suit:
+\begin{center}
+    \mintinline{c}{type identificateur[N][M]...[P];}
+\end{center}
+En particulier, en dimension 2, une déclaration et initialisation suivrait la syntaxe suivante:
+\begin{minted}{c}
+type tableau[N][M]={{e11,...,e1M}   // N paires d'accolades
+                    {e21,...,e2M}   // à M éléments
+                    ...
+                    {eN1,...,eNM}
+                    }
+\end{minted}
+
+
+
+
+
+
+\section{La mémoire}
+\subsection{Les pointeurs}
+\subsection{Le cas des tableaux}
+tab + 1 est implicitement convertie en tab + sizeof(int)
+
+expression[indice]
+Ce qui est équivalent à l’expression suivante.
+
+*(expression + indice)
+
+\subsubsection{Tableaux multidimensionnels}
+Toutefois, en pratique, les tableaux multidimensionnels sont linéarisés et enregistrés en mémoire comme un tableau 1D selon la convention \textit{row-major order}, autrement dit lignes par lignes.\\
+\begin{center}
+    \input{Figures/tabmul}
+\end{center}
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \textbf{Représentation théorique}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \textbf{Représentation en pratique}
+\end{minipage}
+
+\vspace*{0.5cm}De ce fait, si on considère un tableau $\mathcal{T}=(t_{i,j})$ de taille $N\times M$, alors: $$\forall (i,j)\in [0..N[\times [0..M[, ~ \left\{
+    \begin{array}{ll}
+        \&t_{i,j}=j+N*i & \mbox{adresse de la case}\\
+        \mathcal{T}[i][j] & \mbox{accès à la valeur en C}
+    \end{array}
+\right.
+$$
+
+
+\subsection{Le cas des structures}
+portée des arguments, pointeur sur structure, esp mem des champs pas forcement contiguë, 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Annexe}
+\subsection{Boîte à outils}
+\subsubsection{Test ici}
+\subsubsubsection{Encore un autre}
+\input{tables/tablesynthese}
+\newpage
+\subsection{Représentation des réels}
+\newpage
+\subsection{Calcul propositionnel}
+\label{cp}
+On définit $\mathbb{B}=\{V;F\}$ (i.e l'ensemble des valeurs booléennes), ainsi que les fonctions suivantes:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+        $+= \left( \begin{array}{lll}
+\mathbb{B}\times\mathbb{B} & \rightarrow & \mathbb{B}\\
+(V,V)& \mapsto & V\\
+(V,F)& \mapsto & V\\
+(F,V)& \mapsto & V\\
+(F,F)& \mapsto & F\\
+\end{array}\right)$ & $\times= \left( \begin{array}{lll}
+\mathbb{B}\times\mathbb{B} & \rightarrow & \mathbb{B}\\
+(V,V)& \mapsto & V\\
+(V,F)& \mapsto & F\\
+(F,V)& \mapsto & F\\
+(F,F)& \mapsto & F\\
+\end{array}\right)$ & $\Bar{\bullet}= \left( \begin{array}{lll}
+\mathbb{B} & \rightarrow & \mathbb{B}\\
+V& \mapsto & F\\
+F& \mapsto & V\\
+\end{array}\right)$ \\
+    \end{tabular}
+    \label{tab:op}
+\end{table}
+\noindent
+Ce faisant, $(\mathbb{B},+,\times,\Bar{\bullet})$ est appelé \textbf{Algèbre de Boole}.
+\begin{rem}{0.5}
+    $\Bar{\bullet}$ est un opérateur unaire semblable à la conjugaison dans $\mathbb{C}$. De plus, $+,\times,\Bar{\bullet}$ sont des lois internes sur la sémantique des formules propositionnelles. On les distingue des opérateur $\vee,\wedge,\neg$ qui font sens syntaxiquement sur $\mathbb{F}_{p}(\mathcal{Q})$ l'ensemble des formules propositionnelles construit par induction à partir d'un ensemble de symboles $\mathcal{Q}$, appelés \textbf{variables propositionnelles}. On se référera à un cours de logique pour aller plus loin.
+\end{rem}
+
+\noindent
+\textbf{Propriété} ~ Soit $(\mathbb{B},+,\times,\Bar{\bullet})$, alors on a les propriétés suivantes:
+\vspace*{-0.3cm}
+\begin{itemize}
+    \flch $+$ et $\times$ sont associatives, commutatives et distributives l'une par rapport à l'autre
+    \flch $+$ admet pour élément neutre \textbf{F}
+    \flch $\times$ admet pour élément neutre \textbf{V}
+    \flch \textbf{V} est absorbant pour $+$
+    \flch \textbf{F} est absorbant pour $\times$
+    \flch $\Bar{\bullet}$ est involutive
+\end{itemize}
+\textit{Démonstrations: En utilisant les définitions ou en réalisant des tables de vérité.}\\[0.5cm]
+\noindent
+\textbf{Propriété} ~ Soit $a,b\in\mathbb{B}$,
+$$\overline{(a+b)}=\Bar{a}\times\Bar{b} ~ et ~ \overline{(a\times b)}=\Bar{a}+\Bar{b}$$
+
+\begin{rem}{0}
+    L'implémentation en C de $+,\times,\Bar{\bullet}$ correspond à \mintinline{c}{&&,||,!}
+\end{rem}
+
+
+    
+
+\newpage
+\listoflistings
+\newpage
+\printbibliography
+\end{document}

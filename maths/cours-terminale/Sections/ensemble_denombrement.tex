@@ -1,0 +1,267 @@
+\section{Les ensembles}
+\label{ensembles}
+\subsection{Éléments généraux}
+\begin{df}{Ensemble}
+    Un ensemble est une collection d'objets appelés \textbf{éléments}, qui peuvent être en nombre fini ou non.
+\end{df}
+Un ensemble peut se définir de deux manières :
+\begin{itemize}
+    \item En donnant la liste explicite et exhaustive de ses éléments. (Raisonnablement dans le cas des ensembles finis)\\
+    Exemple: $E=\{6,8,D,\%\}$
+    \item Par compréhension : lorsque les éléments vérifient une propriété particulière.\\
+    Exemple: $ E=\{x\in\mathbb{R} : x^{2}+x+1=0\} ~ i.e ~ Rac(X^{2}+X+1)$
+\end{itemize}
+\noindent
+On note $\emptyset$ l'ensemble vide, ne contenant donc aucun élément. Par ailleurs, un certain nombre d'ensembles de références sont nécessaires ; à savoir: $(\mathbb{N},\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C})$
+\noindent
+On définit pour la suite E et F des ensembles quelconques, ainsi que $n\in\mathbb{N}^{*}$
+\subsection{Opérations ensemblistes}
+\begin{itemize}
+    \item Appartenance: $x\in E$ si x appartient à E
+    \item Inclusion: $E\subset F$ si E est inclus dans F ; i.e, E est un sous-ensemble de F
+    \item Réunion: $E\cup F$ est l'ensemble des éléments appartenant à E ou F
+    \item Intersection: $E\cap F$ est l'ensemble des éléments appartenant à E et à F
+    \item Exclusion: $E\backslash F$ est l'ensemble des éléments de E qui n'appartiennent pas à F
+    \item Différence symétrique: $E\triangle F$ est l'ensemble des éléments qui sont uniquement dans E et uniquement dans F. Autrement dit, $E\triangle F=(E\cup F)\backslash (E\cap F)$
+\end{itemize}
+Par ailleurs, on note P(E) \textbf{les parties de E}, l'ensemble des sous-ensembles de E.\\[0.3cm]
+\warning ~ Si $B=\{1,7,8\}$ Attention à la différence entre $\{1\}\subset B ~et~ \{1\}\in P(B)$
+\subsection{Cardinalité}
+\begin{df}{Cardinal}
+    On note Card(E), |E| ou encore \#E, le nombre d'éléments de E. On l'appelle \textbf{cardinal} de E.
+\end{df}
+\begin{df}{Ensembles deux à deux disjoints}
+    Si $E_1,...,E_n$ sont deux à deux disjoints, alors $\forall i,j\in[1..n] ~ et ~i\neq j, Card((E_i\cap E_j))=0$
+\end{df}
+\begin{p}
+    Si $E_1,...,E_n$ sont deux à deux disjoints et finis, alors $Card(E_1\cup ... \cup E_n)=\sum_{i=1}^{n}Card(E_i)$
+\end{p}
+\newpage
+\subsection{Produit cartésien}
+On appelle produit cartésien de n ensemble 
+ $E_1,...,E_n$, l'ensemble \begin{center}
+     $E_1\times...\times E_n=\{(x_1,...,x_n) ~|~ x_1\in E_1,...,x_n\in E_n\}$
+ \end{center}
+ dont les éléments sont des n\_uplets. On parle alors de couple, triplet, quadruplets etc...\\
+ Si l'un des $E_i$ est vide alors, le produit cartésien l'est aussi. Enfin, si $E_1=...=E_n=E$ alors on note leur produit cartésien $E^{n}$
+
+\begin{p}
+    Soient $E_1,...,E_n$ des ensembles finis.\\
+    $Card(E_1\times...\times E_n)=\prod\limits_{i=1}^n Card(E_{i})$
+\end{p}
+\subsection*{Exercices}
+\subsubsection*{Exercices 1}
+On considère le diagramme de Venn suivant, avec A,B,C trois parties d'un ensemble E;~et a,b,c,d,e,f,g,h des éléments de E.\\[.5cm]
+\begin{minipage}{0.5\textwidth}
+    \includegraphics[scale=2]{venn.png}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+    Dire si les affirmations suivantes sont vraies ou fausses:
+    \begin{itemize}
+        \item $g\in A\cap \bar B$
+        \item $g\in\bar A\cap \bar B$
+        \item $g\in\bar A\cup\bar B$
+        \item $f\in C\backslash A$
+        \item $e\in \bar A\cap\bar B\cap \bar C$
+        \item $\{h,b\}\subset \bar A\cap\bar B$
+    \end{itemize}
+\end{minipage}
+\subsubsection*{Exercice 2}
+Soient 
+A
+,
+B
+,
+C
+ trois ensembles tels que 
+A
+$\cup$
+B
+=
+B
+$\cap$
+C
+. Montrer que 
+A
+$\subset$
+B
+$\subset$
+C
+.
+
+
+\subsubsection*{Exercice 3}
+Soient 
+A
+, 
+B
+ et 
+C
+ trois parties d'un ensemble 
+E
+. Pour 
+X
+$\subset$
+E
+, on note 
+$X^c$
+ le complémentaire de 
+X
+ dans 
+E
+. Démontrer les lois de Morgan suivantes :\\
+\begin{center}
+    \begin{array}{lll}
+\mathbf{1.}\ (A\cap B)\cup C=(A\cup C)\cap (B\cup C)&&\mathbf{2.}\ (A^c)^c=A\\
+\mathbf{3.}\ (A\cap B)^c=A^c\cup B^c&&\mathbf{4.}\ (A\cup B)^c=A^c\cap B^c.\\
+\end{array}
+\end{center}
+
+\subsubsection*{Exercice 4}
+Écrire l'ensemble des parties de E={a,b,c,d}.
+\subsubsection*{Exercice 5}
+On considère l'ensemble $D=\{(x,y)\in\mathbb R^2;\ x^2+y^2\leq 1\}$. Montrer qu'il ne peut pas s'écrire comme un produit cartésien de deux parties de $\mathbb{R}$. 
+\subsubsection*{Exercice 6}
+On considère $\sum_1 =\{0,1\}$ et  $\sum_2 =\{a,b,c,d,e\}$. On souhaite composer des mots de passes composé d'un chiffre et de 8 lettres. Quel est le nombre de mdp possibles ?\\ Quel est le nombres de mots de passes si on s'autorise à avoir un ou deux chiffres ?
+\section{Dénombrement}
+On considère dans cette partie un ensemble E de cardinal fini n et $0\leq k\leq n$:
+\subsection{k\_Arrangements}
+
+\begin{df}{Arrangement}
+    On appelle k\_liste ou k\_Arrangements un k\_ uplet d'éléments de E tous différents. 
+\end{df}
+On assimile un k\_Arrangement au nombre d'issues lors d'un tirage sans remise de k éléments dans un ensemble à n éléments.
+\begin{p}
+    Le nombre de k\_Arrangements vaut $n(n-1)\dots (n-k+1)=\frac{n!}{(n-k)!}$
+\end{p}
+\begin{p}
+    Le nombre de permutations de E vaut $n!$
+\end{p}
+
+\subsection{Combinaisons}
+\begin{df}{k\_Combinaison}
+    Partie de E à k éléments. 
+\end{df}
+On assimile le nombre de k-combinaison au nombre d'issues d'un tirage avec remise de k éléments dans un ensemble de cardinal n.
+\begin{p}
+    Le nombre de k-combinaisons de E est $\binom nk=\frac{n!}{k!(n-k)!}$\\
+    Symétrie des coefficients binomiaux: $\binom nk=\binom n{n-k}$
+\end{p}
+\subsubsection*{Exercice 7}
+On considère une course de karting comprenant n pilotes. Déterminer le nombre de podium possibles (on classera les 3 premiers).
+\subsubsection*{Exercice 8}
+On considère une course de karting comprenant n pilotes. Malheureusement, tous ne peuvent pas s'élancer sur la grille de départ en même temps. Déterminer le nombre de possibilités de sélectionner les k premiers qui partiront en premiers.  
+\subsection{Triangle de Pascal}
+
+
+\begin{center}
+    
+\begin{tikzpicture}[my rule/.style={line width=\myrulewidth},
+                    my outline color/.initial=blue!75!black,
+                    my text/.style={
+                      color/.expanded={\pgfkeysvalueof{/tikz/my outline color}}},
+                    my arrow/.style={
+                      ->, line width=0.6pt,
+                      draw/.expanded={\pgfkeysvalueof{/tikz/my outline color}}},
+                    my highlight/.style={
+                      draw/.expanded={\pgfkeysvalueof{/tikz/my outline color}},
+                      fill=blue!15, line width=0.6pt, rounded corners=2pt}]
+
+\matrix (mat) [
+  my rule, draw, inner sep=0, matrix of math nodes,
+  nodes={minimum width=\myCellSize,
+         text height=0.6\myCellSize, text depth=0.4\myCellSize}]
+  {
+    \raisebox{-0.8ex}{$n$}\kern 0.3em\raisebox{0.7ex}{$k$}
+           & 0      & 1 & 2 & 3 & 4 & 5   &[-2pt] \cdots \\
+    0      & 1                                           \\
+    1      & 1      & 1                                  \\
+    2      & 1      & 2 & 1                              \\
+    3      & 1      & 3 & 3  & 1                         \\
+    4      & 1      & 4 & 6  & 4  & 1                    \\
+    5      & 1      & 5 & 10 & 10 & 5 & 1                \\[-2pt]
+    \vdots & \vdots &   &    &    &   &   &       \ddots \\
+  };
+
+\begin{scope}[my rule]
+\draw (mat-1-1.north east) -- (mat-8-1.south east);
+\draw (mat-1-1.south west) -- (mat-1-8.south east);
+\draw ([shift={(0.5\myrulewidth, -0.5\myrulewidth)}]mat-1-1.north west) --
+      (mat-1-1.south east);
+\end{scope}
+
+\path[my text] node [right=1cm of mat, label=above:{Formule de Pascal}]
+  (formula)
+  {%
+    $\begin{aligned}
+      \binom{n}{k} &\mathrel{+} \binom{n}{k+1} \\
+                   &=           \binom{n+1}{k+1}
+    \end{aligned}$%
+  };
+
+\begin{scope}[on background layer]
+  \path[name path=p, my highlight]
+    (mat-5-3.north west) -| coordinate (A)
+    (mat-6-4.south east) -|
+    (mat-5-3.south east) --
+    (mat-5-3.south west)
+    -- cycle;
+
+  \pgfmathsetlengthmacro{\myWidth}{width("$\displaystyle \binom{n}{k}$")}
+  \pgfmathsetlengthmacro{\myTotalHeight}{
+    height("$\displaystyle \binom{n}{k}$") +
+    depth("$\displaystyle \binom{n}{k}$")}
+  \pgfmathsetlengthmacro{\myXshift}{\pgfkeysvalueof{/pgf/inner xsep} + \myWidth}
+  \pgfmathsetlengthmacro{\myYshift}{\myTotalHeight +
+                                    2*\pgfkeysvalueof{/pgf/inner ysep}}
+
+  \path[my highlight]
+    (formula.north west) -|
+    (formula.south east) -|
+    ([shift={(\myXshift,-\myYshift)}]formula.north west) coordinate (B) --
+    (formula.north west |- B) --
+    cycle;
+  % Pour que la flèche parte vraiment de la bordure arrondie de p, il faut
+  % ruser un peu. D'abord, il nous faut le point de départ :
+  \path[name path=s] ([shift={(-10pt,-10pt)}]A) -- (A);
+  \path[name intersections={of=p and s}];
+\end{scope}
+
+% Ensuite, on peut tracer la flèche.
+\path[my arrow] (intersection-1) to[bend left=10]
+                ($(formula.north west)!0.5!(formula.west)$);
+\end{tikzpicture}
+\end{center}
+\subsubsection*{Démonstrations}
+\begin{itemize}
+    \flch\textbf{Méthode combinatoire}\\[5cm]
+    \flch\textbf{Méthode algébrique}\\[5cm]
+\end{itemize}
+
+
+
+
+\newpage 
+\begin{p}
+    Pour n un entier natural, on a :$\sum_{k=0}^n=\binom{n}{k}=2^n$
+\end{p}
+\subsubsection*{Démonstrations}
+\begin{itemize}
+    \flch\textbf{Méthode combinatoire}\\[5cm]
+    \flch\textbf{Méthode algébrique}\\[5cm]
+\end{itemize}
+\begin{p}
+    Le nombre de parties d'en ensemble à n éléments vaut $2^n$
+\end{p}
+\subsubsection*{Exercice - Spécialité NSI}
+\textit{On pourra aborder ici quelques notions sur les Langages}\\[0.3cm]
+On considère $\sum_1 =\{0,1\}$ et  $\sum_2 =\{a,b,c,d,e\}$. On souhaite composer des mots de passes à partir du langage engendré par $L=\sum_{1}^{+} .\sum_{2}^{+}$ ; dont on restreindra leur taille à un entier n>1. On notera L' le langage subséquent. 
+\begin{itemize}
+    \item \textbf{Cas où n=2}\\
+     Préciser la partie de L, notée L', qui nous intéresse ici à l'aide d'une description ensembliste par compréhension.\\
+     Même question avec un produit cartésien. Donner alors le cardinal de cet ensemble. 
+     \item \textbf{Cas où n>1}\\
+     On considère u un mot de L'. Préciser sa décomposition et les caractéristiques de celles-ci.\\
+     Donner le cardinal de L' en fonction de n, et des autres données de l'exercice. 
+\end{itemize}
+

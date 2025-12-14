@@ -1,0 +1,388 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+
+%%%%%%%%%%%%%%%%%%%%%% LES PACKAGES
+\input{packages_MP2I.tex}
+\usepackage{pgffor} 
+%tikz juste pour le foreach pour présenter la palette de couleurs
+
+%%%%%%%%%%%%%%%%%%%%%% MISE EN FORME
+\input{mise_en_forme_MP2I.tex}
+%on change un peu cette mise en forme ici
+%car le mode d'emploi n'est pas une copie...
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\lfoot{ 
+Informatique - MP2I Lycée Fermat - 2021/2022
+}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES COMMANDES 
+\input{commandes_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LA PALETTE DE COULEURS
+\input{palette_aef.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{fancy} %active les pieds de pages
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Généralités}
+%======================================
+\subsection{Contenu du modèle}
+%======================================
+Cette archive a été crée à destination d'élèves de classe de MP2I
+(du lycée Fermat) souhaitant rédiger leurs devoirs en latex.
+Elle peut être partagée avec toute personne qui pourrait trouver ça utile.
+Elle contient :
+\begin{itemize}
+\flch Ce mode d'emploi au format PDF : 
+\texttt{mode\_d'emploi.pdf}
+\flch Le code source de ce document, rédigé lui-même en latex : \texttt{mode\_d'emploi.tex}
+\flch La liste des imports de package utiles :
+\texttt{packages\_MP2I.tex}
+\flch Du code latex pour paramétrer la mise en page, 
+et la mise en forme :
+\texttt{mise\_en\_forme\_MP2I.tex}
+\flch Du code latex pour définir des commandes (des raccourcis) :
+\texttt{commandes\_MP2I.tex}
+\flch Une liste de définitions de couleurs :
+\texttt{palette\_aef.tex}
+\flch Un Makefile pour nettoyer automatiquement les fichiers auxiliaires
+générés dans le dossier courant (se lance dans un terminal linux
+avec \mintinline{bash}{make clean}) :
+\texttt{Makefile}
+\flch Un document latex (presque) prêt à être rempli :
+\texttt{copie\_vide.tex}
+\flch Le document PDF généré par ce document latex :
+\texttt{copie\_vide.pdf}
+\end{itemize}
+
+
+%======================================
+\subsection{Avant de commencer}
+%--------------------------------------
+Avant d'utiliser la copie \texttt{copie\_vide.tex}
+il faut remplir votre nom et votre prénom à deux endroits dans
+le fichier \texttt{mise\_en\_forme\_MP2I.tex}.
+Pour trouver ces deux endroits dans le code,
+vous pouvez rechercher \textsf{Ctrl+F} le mot \texttt{remplir}.\\
+Il faut alors supprimer le  
+\mintinline{latex}{\textcolor{red}{$\leftarrow$ à remplir}},
+et évidemment remplacer \texttt{nom} et \texttt{prénom} par les vôtres.
+Ces deux changements devraient 
+s'observer sur la titre en haut de la première page
+et sur le pied de page sur toutes les pages
+(après compilation, bien sûr).
+
+%======================================
+\subsection{Organisation de la copie}
+%--------------------------------------
+La commande qui génère le haut de la première page est
+\mintinline{latex}{\titreCopie}.
+Elle est définie dans le fichier \texttt{mise\_en\_forme\_MP2I.tex},
+vous pouvez donc la personnaliser.
+En l'état, elle prend deux arguments,
+le premier est le titre du rendu, 
+le second est la date qui apparaît en haut à droite.
+\\[0.2cm]
+Chaque section du document correspond à un exercice,
+et chaque sous-section à une question de cet exercice.
+La numérotation est automatique,
+à chaque commande \mintinline{latex}{\section{}}
+le numéro d'exercice est incrémenté 
+et le numéro de question remis à 0.
+On peut toutefois sauter un exercice grâce à la commande
+\mintinline{latex}{\addtocounter{section}{1}},
+voire commencer à l'exercice $n+1$ grâce à la commande
+\mintinline{latex}{\setcounter{section}{n}}.
+De même, le numéro de question est incrémenté 
+à chaque \mintinline{latex}{\subsection{}},
+mais on peut sauter une question avec
+\mintinline{latex}{\addtocounter{subsection}{1}},
+voire commencer à la question $n+1$ avec
+\mintinline{latex}{\setcounter{subsection}{n}}.
+
+%======================================
+\subsection{Divers}
+%--------------------------------------
+Les commentaires en latex sont précédés du symbole \texttt{\%}
+(pour obtenir le symbole \texttt{\%} on tape donc
+\mintinline{latex}{\%}).
+Avec TexMaker on peut utiliser \textsf{Ctrl+T} pour commenter
+et \textsf{Ctrl+U} pour dé-commenter.
+\\[0.2cm]
+À la fin d'une ligne non vide,
+on réalise un saut de ligne simple avec \mintinline{latex}{\\},
+ou un saut de ligne suivi d'un espace de 8mm (par exemple)
+avec \mintinline{latex}{\\[8mm]}
+(pour obtenir le symbole \texttt{\textbackslash} 
+on tape \mintinline{latex}{\textbackslash} en mode texte,
+ou  \mintinline{latex}{\backslash} en mode maths).
+On réalise un saut de page avec
+\mintinline{latex}{\newpage}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inclure du code}
+%======================================
+Pour inclure du code source dans un document 
+avec une coloration syntaxique adaptée au langage,
+j'utilise le package \texttt{minted}
+(à préférer à \texttt{listings} pour le Ocaml notamment).
+\\
+Une fois ce package importé, 
+on peut afficher du code en utilisant les paramètres par défaut.
+Cependant, j'ai redéfini certains paramètres pour 
+le C et le OCaml (\ie les langages au programme de MP2I).
+Ces définitions se trouvent dans le fichier 
+\texttt{mise\_en\_forme\_MP2I.tex}
+si vous voulez les modifier.\\
+
+\noindent
+Il y a trois façon d'afficher du code.
+\begin{itemize}
+\flch 
+"En ligne", c'est-à-dire intégré au texte,
+avec la commande
+\mintinline{latex}{\mintinline{lang}{code}}.
+\\
+Cela donne par exemple en C \mintinline{c}{printf("hello");},
+ou en OCaml \mintinline{ocaml}{let a:int = 12;}.
+\flch
+Dans un bloc, à partir du code écrit directement dans le code latex,
+à l'intérieur de l'environnement \texttt{minted},
+c'est à dire comme ceci :
+\inputminted[firstline=1, lastline=3]{latex}{exemple_code.txt}
+\flch
+Dans un bloc, à partir du code d'un autre fichier,
+entre les lignes a et b
+avec la commande suivante :
+\mintinline{latex}{\inputminted[firstline=a, lastline=b,firstnumber=1]{langage}{fichier}}.
+\end{itemize}
+On donne ci-dessous deux exemples de code dans un bloc,
+le rendu étant le même que l'on utilise
+\mintinline{latex}{\inputminted} ou 
+\mintinline{latex}{\begin{minted}....}.\\
+
+\begin{minipage}[t]{0.48\textwidth}
+\inputminted[firstline=5, lastline=8,firstnumber=1]{c}{exemple_code.txt}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+\inputminted[firstline=10, lastline=14,firstnumber=1]{ocaml}{exemple_code.txt}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Faire un tableau}
+%======================================
+Pour un tableau on peut utiliser
+l'environnement \texttt{tabular}.
+On précise le format du tableau
+en donnant le type de ses colonnes :
+\texttt{c} pour centrée,
+\texttt{r} pour alignée à droite,
+\texttt{l} pour alignée à gauche.
+La largeur de ces colonnes s'adapte à leur contenu,
+au contraire une colonne de type \mintinline{latex}{p{xcm}}
+est de largeur fixée : \texttt{x}cm.
+On peut aussi redéfinir l'espace inter-colonne 
+en ajoutant \mintinline{latex}{@{nouvel inter colonne}},
+ou préciser que l'on souhaite un trait vertical (\resp deux)
+entre deux colonnes
+avec \mintinline{latex}{|} (\resp \mintinline{latex}{||}).
+Enfin, pour obtenir une ligne horizontale 
+on utilise \mintinline{latex}{\hline}.
+On donne ci-dessous deux exemples (code à gauche, rendu à droite).
+\\
+
+
+\noindent
+\begin{minipage}{0.54\textwidth}
+\begin{minted}{latex}
+\begin{tabular}{@{}rcl}
+alors & bonjour & Ça va?\\
+$a$ & $\mathbb{B}$ & CoucouHibouCoucouHibou\\
+\end{tabular}
+\end{minted}
+\end{minipage}
+\hspace*{0.1cm}\color{expli}\vrule \color{black}\hspace*{0.1cm}
+\begin{minipage}{0.46\textwidth}
+\begin{tabular}{@{}rcl}
+alors & bonjour & Ça va?\\
+$a$ & $\mathbb{B}$ & CoucouHibouCoucouHibou\\
+\end{tabular}
+\end{minipage}\\[0.6cm]
+
+\noindent
+\begin{minipage}{0.54\textwidth}
+\begin{minted}{latex}
+\begin{tabular}{p{4.6cm}|c||c@{ ! }c|}
+titre long qui va à la ligne tout seul &&&\\
+\hline \hline\\[-0.2cm]
+$\sqrt{(1+2)*(3+4)} $ & 1 & 2 & 3\\
+\hline
+aaa & $aaa$ & \texttt{aaa} & A\\
+\end{tabular}
+\end{minted}
+\end{minipage}
+\hspace*{0.1cm}\color{expli}\vrule \color{black}\hspace*{0.1cm}
+\begin{minipage}{0.46\textwidth}
+\begin{tabular}{p{4.6cm}|c||c@{ ! }c|}
+titre un peu longue qui va à la ligne tout seul &&&\\
+\hline \hline
+${(1+2)*(3+4)} $ & 1 & 2 & 3\\
+\hline
+aaa & $aaa$ & \texttt{aaa} & A\\
+\end{tabular}
+\end{minipage}
+
+\vspace*{-0.2cm}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Expressions mathématiques}
+%======================================
+On donne ci-dessous des expressions mathématiques 
+que vous pourriez être amenés à écrire.
+Pour voir comment elles sont codées,
+regardez le code source dans le fichier \texttt{mode\_d'emploi.tex}.
+Si vous utilisez TexMaker et  son afficheur de PDF interne,
+vous pouvez facilement retrouver la portion de code correspondante
+en faisant \textsf{Control+Clic} sur le document 
+(il faut cependant avoir compilé le code source).
+
+%======================================
+\subsection{Ensemble}
+$$\left\lbrace 
+\sum_{i=1}^n x_i + 3 \sqrt{25+3}
+\enskip \middle| \enskip
+(x_i)_{i\in[1..n] } \in A^n
+\right\rbrace$$
+
+%======================================
+\subsection{Fonction}
+$$f= \left( \begin{array}{lll}
+A & \rightarrow & B\\
+x & \mapsto & x+2\\
+\end{array}\right)$$
+
+%======================================
+\subsection{Disjonction de cas}
+$
+f(x) = \begin{cases}
+a & \text{si } x=0\\
+c & \text{sinon}\\
+\end{cases}
+$
+\hspace*{0.6cm}
+ou
+\hspace*{0.6cm} 
+$f(x) = \left\lbrace \begin{tabular}{ll}
+$a$ & si $b=0$\\
+$c$ & sinon\\
+\end{tabular}\right.
+$
+\hspace*{0.6cm}
+ou
+\hspace*{0.6cm} 
+$f(x) = \left\lbrace \begin{array}{ll}
+a & \text{si } x=0\\
+c & \text{sinon}\\
+\end{array}\right.
+$
+
+%======================================
+\subsection{Règles de construction}
+Pour les arbres 2-3-4 par exemple 
+$V|^0_{\{_\}}$, $N^2|^2_S$,
+$N^3|^3_{S^\leqslant}$ et
+$N^4|^4_{S^{\leqslant\,\leqslant}}$
+
+
+%======================================
+\subsection{Accolade en dessous}
+$$ \underbrace{a+b+c}_{=125} + d = 125 + d$$
+
+%======================================
+\subsection{Barrer des termes}
+$$ 125 + a + b -125 =  \cancel{125} + a + b - \cancel{125} = a + b $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aligner  des équations}
+%=====================================
+\textcolor{red}{à venir}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Catalogue de symboles}
+%=====================================
+\textcolor{red}{à venir}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Les couleurs}
+%======================================
+\subsection{Astuce}
+\noindent
+Saviez-vous qu'on peut facilement obtenir des nouvelles 
+couleurs en mixant celles existantes? 
+Il suffit de faire \texttt{c1!50!c2} pour mélanger c1 et c2.
+Exemple:
+\textcolor{blue!15!green}{blue!15!green}
+\textcolor{blue!50!green}{blue!50!green}
+\textcolor{blue!80!green}{blue!80!green}
+%======================================
+\subsection{Ma palette de couleurs}
+\noindent
+\noindent
+Les couleurs ci-dessous sont définies dans le fichier \texttt{palette\_aef.tex}.
+\\
+\foreach \coul in {jaune,oranger,orange}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+
+\foreach \coul in {vert,herbe,vertFonce}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {vertdEau,turquoise,monCyan,turquoiseFonce}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {marine, doubleu,lavande,mauve,lilas}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {violet, violette,prune,prunelle}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {roseAcidule,magenta,rose,framboise,grenat}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {brique, briqueRouge}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {saumon}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+\foreach \coul in {ocre,chamois,taupe}{
+\noindent
+\textcolor{\coul}{un aperçu de la couleur \textbf{\coul}  \enskip \hrulefill}\\
+} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Définir des nouvelles commandes}
+%\textcolor{red}{à venir}
+
+
+\end{document}

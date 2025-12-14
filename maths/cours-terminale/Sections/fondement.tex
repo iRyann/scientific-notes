@@ -1,0 +1,204 @@
+\section{Fondements}
+Les mathématiques sont une discipline qui exige à la fois clarté, rigueur et originalité.
+Ainsi, il convient de maîtriser un certain nombre de conventions afin de rendre son propos cohérent
+et intelligible. Dans ce contexte, on se propose de présenter les notations usuelles nécessaires
+à notre pratique des mathématiques.
+\subsection{Les ensembles de nombres}
+Les ensembles sont traités spécifiquement dans le chapitre \cref{ensembles}, pour autant, on procède
+à un certain nombre de rappels ici.
+\subsubsection{Ensembles usuels}
+\begin{itemize}
+    \item On appelle ensemble des \important{entiers naturels}, nôté $\mathbb{N}$, l'ensemble composé
+    des nombres entiers positifs ou nuls.
+    \item On appelle ensemble des \important{entiers relatifs}, nôté $\mathbb{Z}$, l'ensemble composé
+    des entiers de signe quelconque. 
+    \item On appelle ensemble des \important{rationnels}, nôté $\mathbb{Q}$, l'ensemble composé
+    des nombres pouvant s'écrire sous la forme d'une fraction.
+    \item On appelle ensemble des \important{décimaux}, nôté $\mathbb{D}$, l'ensemble composé
+    des nombres à virgule.
+    \item On appelle ensemble des \important{réels}, nôté $\mathbb{R}$, l'ensemble composé
+    des nombres réels (\textit{i.e. quelconques})
+    \item On appelle ensemble des \important{complexes}, nôté $\mathbb{C}$, l'ensemble composé
+    des nombres complexes. (\textit{hors programme})
+\end{itemize}
+\begin{coder}
+    De plus, on a l'inclusion suivante entre les ensembles précédemment cités:
+$$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{D} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}$$
+\end{coder}
+Par ailleurs, étant donné un ensemble $\mathbb{E}$ parmi les ensembles usuels, on introduit
+les notations:
+\begin{itemize}
+    \item $\mathbb{E}^* = \mathbb{E}\setminus\{0\}$
+    \item $\mathbb{E}^+$ l'ensemble des termes positifs ou nuls de $\mathbb{E}$.
+    \item $\mathbb{E}^-$ l'ensemble des termes négatifs de $\mathbb{E}$.
+\end{itemize}
+Ce faisant, on a par exemple $\mathbb{R}^{*}_{+}$ l'ensemble des réels strictement positifs, $\mathbb{Z}^{*}$
+l'ensemble des entiers relatifs privé de 0, et ainsi de suite. 
+\subsubsection{Intervalles}
+Considérons $a,b\in\mathbb{R}$ tels que $a \leq b$. Dès lors, on note:
+\begin{itemize}
+    \item $[a,b]$ l'ensemble des nombres réels compris entre $a$ et $b$ inclus. Autrement-dit
+    l'ensemble des réels $x$ tels que $a \leq x \leq b$. 
+    \item $]a,b]$ l'ensemble des nombres réels compris entre $a$ exclu et $b$ inclus. Autrement-dit
+    l'ensemble des réels $x$ tels que $a < x \leq b$. De façon similaire, on définit $[a,b[ et ]a,b[$.
+\end{itemize}
+De plus, on définit les intervalles d'entiers. Considérons $a,b\in\mathbb{N}$ tels que $a \leq b$. 
+Dès lors, on note:
+\begin{itemize}
+    \item $[\![a,b]\!]$ l'ensemble des nombres entiers compris entre $a$ et $b$ inclus. Autrement-dit
+    l'ensemble des entiers $x$ tels que $a \leq x \leq b$. 
+    \item $]\!]3;4]\!]$ l'ensemble des nombres entiers compris entre $a$ exclu et $b$ inclus. Autrement-dit
+    l'ensemble des entiers $x$ tels que $a < x \leq b$. De façon similaire, on définit $[\![a,b[\![$ et $]\!]a,b[\![$.
+\end{itemize}
+On note $+\infty$ et $-\infty$ les infinis, $\infty$ par abus lorsque le signe est obvie, ainsi que
+$\pm\infty$ lorsque l'on souhaite dénoter les deux cas. Par ailleurs, \important{lorsqu'un infinis constitue l'une des bornes
+d'un intervalle, la borne qui lui est adjointe est nécessairement ouverte}. Par exemple, on note 
+$[0,+\infty[=\mathbb{R}^+$.\\
+\begin{codeb}
+    \textbf{Remarque}
+    \begin{itemize}
+        \item Si $a,b\in\mathbb{R}$ et $a \leq b$ ; alors, $[b,a]=\emptyset$. Similairement pour les intervalles d'entiers.
+        \item Si $a,b\in\mathbb{R}$ et $a = b$ ; alors, $[a,b]=\{a\}=\{b\}$. Similairement pour les intervalles d'entiers.
+        \item Si $a,b\in\mathbb{N}$ et $a \leq b$ ; alors, $[\![a,b]\!]=\{a, a+1, \dots, b-1, b\}=\{x\in\mathbb{N} : a \leq x \leq b\}$.
+    \end{itemize}
+\end{codeb}
+\subsection{Manipulation des symboles}
+\textit{Pour la suite, on suppose fixé deux ensembles $I$ et $E$ tous deux non vides.}
+\subsection{Famille}
+Une famille est une fonction d'un ensemble $I$ dans un ensemble $E$ permettant
+d'indexer les éléments de $E$ à partir de ceux de $I$. On la note $(x_i)_{i\in I}$,
+ou $(x_i)$ lorsque l'indexation est obvie. De plus, $x_i$ est le $i^{eme}$ termes de la famille. 
+\subsubsection{Sommation}
+Lorsque l'on travaille sur des ensembles, nous pouvons être emmener à sommer leurs éléments. 
+Si on considère une famille $(x_i)$ d'éléments de $E$, alors:
+$$\sum_{i\in I}x_i \text{ est la somme des éléments } x_i, \text{ pour tout } i \text{ dans } I$$
+\begin{codeb}
+    \textbf{Remarque}\\
+    \begin{itemize}
+        \item Il est important de noter que le choix de i importe peu ; subséquemment, on a:
+        $$\sum_{i\in I}x_i = \sum_{j\in I}x_j = \sum_{\beta \in I}x_{\beta}$$
+        On dit que i est une \emph{variable muette}. En revanche, il est important de discerner
+        ce qui est fixé et ce qui ne l'est pas. Conséquentiellement, $\sum_{i\in[1..i]}x_i$ n'a pas de sens.
+        \item Lorsque $E$ est fini de cardinal $n$, on considère $I=\{1,\dots,n\}$. Dans le cas contraire, généralement $I=\mathbb{N}$. 
+    \end{itemize}
+    
+\end{codeb}
+\begin{exemple} Un somme usuelle pour illustrer le principe:
+$$\sum_{k=1}^{n}k=1+2+\dots+n=\sum_{k\in[\![1,n]\!]}k=\frac{n(n+1)}{2}$$
+\end{exemple}
+\subsection{Logique}
+La logique est une branche fondamentale des mathématiques qui sous-tend notre capacité à étayer nos raisonnements en formalisant la notion de démonstration. À ce titre, on dispose de plusieurs outils de rédaction afin de mettre en oeuvre nos démonstrations.
+\begin{definition}
+    On appelle \emph{proposition} un énoncé mathématique possédant une valeur de vérité, vrai ou faux.
+\end{definition}
+\begin{exemple}
+    "\textit{Dans tout triangle rectangle, le carré de l’hypoténuse est égale à la somme
+des carrés des deux autres côtés}" est une proposition vraie.
+\end{exemple}
+\begin{definition}
+    On appelle \emph{axiome} une proposition admise comme vraie.
+\end{definition}
+\subsubsection{Opérateurs}
+\subsubsubsection{Non, ou, et}
+Les opérateurs logiques permettent de former des propositions par \emph{induction} en combinant d'autres propositions. Considérons deux propositions $P$ et $Q$.
+\begin{itemize}
+    \item \important{non $P$} : est la proposition constituée de la négation de $P$
+    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{@{ }c | c }
+        P & $\lnot P$\\
+        \hline 
+        T & \textcolor{red}{F} \\
+        F & \textcolor{red}{T} \\
+        \end{tabular}
+        \caption{Table de vérité de la négation}
+        \label{tab:negation}
+    \end{table}
+    
+    \item \important{$P$ ou $Q$} : est la proposition qui est vrai si au moins l'une de ses deux composantes l'est.
+    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{@{ }c@{ }@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+        P & Q &  & P & $\lor$ & Q & \\
+        \hline 
+        T & T &  &  & \textcolor{red}{T} &  & \\
+        T & F &  &  & \textcolor{red}{T} &  & \\
+        F & T &  &  & \textcolor{red}{T} &  & \\
+        F & F &  &  & \textcolor{red}{F} &  & \\
+        \end{tabular}
+        \caption{Table de vérité de la disjonction}
+        \label{tab:disjonction}
+    \end{table}
+    
+    \item \important{$P$ et $Q$} : est la proposition qui est vrai si $P$ et $Q$ le sont toutes deux.
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{@{ }c@{ }@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+        P & Q &  & P & $\land$ & Q & \\
+        \hline 
+        T & T &  &  & \textcolor{red}{T} &  & \\
+        T & F &  &  & \textcolor{red}{F} &  & \\
+        F & T &  &  & \textcolor{red}{F} &  & \\
+        F & F &  &  & \textcolor{red}{F} &  & \\
+        \end{tabular}
+        \caption{Table de vérité de la conjonction}
+        \label{tab:conjontion}
+    \end{table}
+\end{itemize}
+\newpage
+\subsubsubsection{Implication et équivalence}
+\begin{itemize}
+    \item \important{$P\implies Q$} : est la proposition qui signifie que "si $P$ est vraie, alors $Q$ aussi" c'est à dire "P est fausse ou Q est vraie". On dit que \emph{$P$ implique $Q$}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{@{ }c@{ }@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+        P & Q &  & P & $\rightarrow$ & Q & \\
+        \hline 
+        T & T &  &  & \textcolor{red}{T} &  & \\
+        T & F &  &  & \textcolor{red}{F} &  & \\
+        F & T &  &  & \textcolor{red}{T} &  & \\
+        F & F &  &  & \textcolor{red}{T} &  & \\
+        \end{tabular}
+        \caption{Table de vérité de l'implication}
+        \label{tab:implication}
+    \end{table}
+    \item \important{$P \Leftrightarrow Q$} : est la proposition qui signifie que $\big( $($P$ implique Q) et ($Q$ implique $P$)$\big)$. On dit que \emph{$P$ est équivalent $Q$}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{@{ }c@{ }@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+        P & Q &  & P & $\Leftrightarrow$ & Q & \\
+        \hline 
+        T & T &  &  & \textcolor{red}{T} &  & \\
+        T & F &  &  & \textcolor{red}{F} &  & \\
+        F & T &  &  & \textcolor{red}{F} & T & \\
+        F & F &  &  & \textcolor{red}{T} &  & \\
+        \end{tabular}
+        \caption{Table de vérité de l'équivalence}
+        \label{tab:equiv}
+    \end{table}
+\end{itemize}
+\begin{coder}
+    L'implication et l'équivalence sont des \important{relations transitives}. Ainsi, si :
+    \begin{itemize}
+        \item ($P \implies Q$) et ($Q \implies R$) alors ($P \implies R$)
+        \item  ($P \Leftrightarrow Q$) et ($Q \Leftrightarrow R$) alors ($P \Leftrightarrow R$)
+    \end{itemize}
+\end{coder}
+\subsubsection{Réciproque et contraposée}
+\begin{definition}
+    La \emph{réciproque} de "$P$ implique $Q$" est "$Q$ implique $P$".
+\end{definition}
+\begin{definition}
+    La \emph{contraposée} de "$P$ implique $Q$" est "non $Q$ implique non $P$".
+\end{definition}
+\begin{coder}
+    \important{Une implication et sa contraposée sont équivalentes}. De fait, lorsque l'on souhaite montrer "$P$ implique $Q$", il peut être préférable de montrer "non $Q$ implique non $P$". On parle de \emph{raisonnement par contraposée}
+\end{coder}
+\subsubsection{Quantificateurs}
+Lorsque l'on souhaite utiliser des variables dans nos raisonnements, il est nécessaire d'introduire celles-ci. Pour ce faire, on dispose de \emph{quantificateurs}. Considérons une propriété $P$ dépendant de $x\in \mathcal{D}$, notée $P(x)$.
+\begin{itemize}
+    \item Lorsque $P$ est vraie pour toute valeur de $x$, on note : $\forall x\in \mathcal{D}, P(x).$ Ici, la virgule succédant le quantificateur signifie "on a".
+    \item Lorsque $P$ est vraie pour au moins une valeur de $x$, on note : $\exists \,x \in \mathcal{D}, P(x).$ Ici, la virgule succédant le quantificateur signifie "tel que".
+\end{itemize}

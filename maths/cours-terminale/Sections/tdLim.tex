@@ -1,0 +1,104 @@
+\ssection{Limites et continuité}
+\label{tdlim}
+\noindent
+On considère dans tout ce qui suit une fonction $f$ de $I\subset\mathbb{R}\rightarrow\mathbb{R}$ et $a\in \Bar{I}$\\
+\subsection{Rappels de cours}
+\subsubsection{Voisinage}
+Analogie avec les suites et la condition "à partir d'un certain rang".
+\begin{df}{Voisinage de a $\in\mathbb{R}$}
+    On dit que $f$ vérifie une propriété $\mathcal{P}$ au voisinage de a ssi $\exists ~ \varepsilon >0 : f$ vérifie $\mathcal{P}$ sur $I\cap [a-\varepsilon,a+\varepsilon]$
+\end{df}
+\begin{df}{Voisinage de a $=\infty$}
+    On dit que $f$ vérifie une propriété $\mathcal{P}$ au voisinage de +$\infty$ ssi $\exists ~ M\in\mathbb{R}: f$ vérifie $\mathcal{P}$ sur $I\cap [M,+\infty[$
+\end{df}
+\noindent
+On notera $\mathcal{V}(a)$ l'ensemble des voisinages de a. Dans $\mathbb{R}, \{[a-\eta,a+\eta], \eta\in\mathbb{R}\}$ forme une base de $\mathcal{V}(a)$. Ce faisant, tout voisinage de a peut s'écrire sous cette forme. 
+
+\subsection{Limites}
+
+\subsubsection{Question de cours}
+On considère un réel $l$. Traduisez les assertions suivantes:\\[0.5cm]
+\begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+        \item $f$ tend vers $l$ en a.
+        \item $f$ tend vers $l$ en $+\infty$.
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+        \item $f$ tend vers $+\infty$ en a.
+        \item $f$ tend vers $+\infty$ en $+\infty$.
+\end{itemize}
+\end{minipage}
+
+
+\subsubsection{Démonstrations}
+\vspace*{-0.5cm}
+\begin{pr}
+    Si $f$ admet une limite finie en a, alors $f$ est bornée au voisinage de a.
+\end{pr}
+\begin{enumerate}
+    \item Démontrer la propriété précédente.
+    \item Démontrer le théorème d'unicité de la limite.
+\end{enumerate}
+    \subsubsection{Exercices}
+\begin{enumerate}
+    \item Démontrer que la fonction sinus n'admet pas de limite en l'infini
+    \item Montrer que $\sqrt{x^{2}+1}-x \underset{x\to +\infty}{\longrightarrow} 0$
+    \item La fonction $f= \left\{
+    \begin{array}{ll}
+        e^{\frac{-1}{x}} & \mbox{si } x>0 \\
+        0 & \mbox{sinon.}
+    \end{array}$ est-elle continue sur $\mathbb{R}$?
+    \item Soit $f:\mathbb R\to\mathbb R$. On suppose que $f$ admet une limite $\ell$ en $+\infty$, avec $\ell>0$. Démontrer qu'il existe un réel $A>0$ tel que, pour tout $x\geq A$, $f(x)>0$.
+    \item Soit $f:\mathbb R\to\mathbb R$ périodique et admettant une limite finie $l$ en $+\infty$. Montrer que $f$ est constante.
+\end{enumerate}
+
+\begin{df}{Sinus et cosinus hyperbolique}
+    On définit sur $\mathbb{R}$ les fonctions sh : $x\rightarrow \frac{e^{x}-e^{-x}}{2}$ et ch : $x\rightarrow \frac{e^{x}+e^{-x}}{2}$
+\end{df}
+\subsubsection{Autour de $e^x$}
+\begin{enumerate}
+    \item Résoudre les systèmes d'équations suivantes : 
+$$\begin{array}{lll}
+\mathbf{1.}\ \left\{
+\begin{array}{rcl}
+e^xe^y&=&10\\
+e^{x-y}&=&\frac 25
+\end{array}
+\right.&\quad\quad&\mathbf{2.}\ 
+\left\{
+\begin{array}{rcl}
+e^x-2e^y&=&-5\\
+3e^x+e^y&=&13
+\end{array}\right.\\
+\mathbf{3.}\ \left\{
+\begin{array}{rcl}
+5e^x-e^y&=&19\\
+e^{x+y}&=&30
+\end{array}
+\right.
+\end{array}$$
+\item Démontrer que, pour tout $n\geq 2$, on a 
+$$\left(1+\frac 1n\right)^n \leq e\leq \left(1-\frac 1n\right)^{-n}.$$
+
+\item Démontrer que, pour tous $x,y\in\mathbb{R}$, $$sh(x+y)=sh(x)ch(y)+ch(x)sh(y)$$
+
+\item Montrer que, pour tout $x\neq 0$,
+$$\sum_{k=0}^n ch(kx)=\frac{ch(nx/2)sh\big((n+1)x/2\big)}{sh(x/2)}.$$
+\end{enumerate}
+\subsubsection{Retour sur les limites..}
+\begin{enumerate}
+    \item Montrer que: $\lim\limits_{x\rightarrow l}f(x)=+\infty \Longleftrightarrow \forall (x_n)\in I^{\mathbb{N}} ~ |~ x_n \underset{n\to +\infty}{\longrightarrow} l, ~ f(x_n)\underset{n\to +\infty}{\longrightarrow} +\infty$
+    \item \textit{Variante} - Soit $f:\mathbb R \rightarrow \mathbb R$ périodique. Montrer qu'elle ne peut pas avoir de limite infinie en $+\infty$
+    \item Déterminer les limites des fractions rationnelles suivantes:
+\end{enumerate}
+$$\begin{array}{lll}
+\mathbf{1.} ~ \frac{X^2-X+1}{7X^3}~en~+\infty
+&\quad\quad&\mathbf{2.}\ 
+\frac{X^2+4e^X}{e^X}~en~+\infty\\[0.5cm]
+\mathbf{3.} ~ x^{\frac{1}{1-x}} ~ en~1
+&\quad\quad&\mathbf{4.}\ \lim\limits_{x \rightarrow 0^+} \left(\left(1+\dfrac{1}{\sqrt{x}}\right) (x-3)\right)
+
+\end{array}
+$$

@@ -1,0 +1,171 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+
+%%%%%%%%%%%%%%%%%%%%%% LES PACKAGES
+\input{packages_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%% MISE EN FORME
+\input{mise_en_forme_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LA PALETTE DE COULEURS
+\input{palette_aef.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES COMMANDES 
+\input{commandes_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES "BOITES"
+\newenvironment{p}{%
+  \vspace*{0.5cm}
+  \thmbox[S]{\textbf{Propriété}}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{df}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Définition:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{rp}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Rappel:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+\newenvironment{pr}{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Proposition}}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+  
+
+
+\PassOptionsToPackage{svgnames}{xcolor}
+
+\usepackage{tcolorbox}
+
+
+
+\renewcommand*\contentsname{Sommaire}
+
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\usetikzlibrary{babel, backgrounds, calc, intersections, matrix, positioning}
+
+\newlength{\myrulewidth}
+\setlength{\myrulewidth}{0.4pt} % c'est la valeur par défaut de \pgflinewidth
+\newlength{\myCellSize}
+\setlength{\myCellSize}{0.7cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{chapter}
+\newcounter{thm}
+
+\usepackage{mathtools, amssymb}
+        \usepackage[thmmarks, amsmath]{ntheorem}
+        %------------------------------------------------
+        \theoremstyle{plain}
+        \theoremheaderfont{\upshape\bfseries}
+        \theorembodyfont{\itshape}
+        \theoremseparator{\textbf{.\,---}}
+        \newtheorem{theoreme}{Théorème}[chapter]
+        \newtheorem{corollaire}[thm]{Corollaire}
+        \newtheorem{lemme}[thm]{Lemme}
+        %-----------------------------------------------
+        \theoremheaderfont{\bfseries}
+        \theorembodyfont{\mdseries\upshape}
+        \theoremseparator{.}
+        \theoremstyle{definition}
+        \newtheorem{definition}{Définition}[chapter]
+        \newtheorem{exemple}{Exemple}[chapter]
+        \newtheorem{exo}{Exercice}[chapter]
+        \newtheorem{propriete}{Propriété}[chapter]
+
+        %------------------------------------------------
+        \theoremstyle{nonumberplain}
+        \theoremheaderfont{\mdseries\upshape}
+        \theoremsymbol{$\mathrm{o}.\varepsilon.\delta.$}
+        \theoremheaderfont{\scshape}
+        \theoremseparator{\,:}
+        \newtheorem{dem}{Démonstration}
+    \setcounter{chapter}{1}
+    \setcounter{thm}{1}
+
+\usepackage{cleveref}
+\crefformat{refth}{#2Théorème~#1#3}{}
+\crefformat{refdef}{#2Définition~#1#3}{}
+\crefformat{refrem}{#2Remarque~#1#3}{}
+\crefformat{refdem}{#2Démonstration~#1#3}{}
+\crefformat{refexo}{#2Exercice~#1#3}{}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{fancy} %active les pieds de pages
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{couv}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{Sections/suites}
+\include{Sections/fondement}
+%\include{Sections/rec}
+%\include{Sections/corr}
+%\include{Sections/ensemble_denombrement}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{TD}
+\begin{enumerate}
+    \item Limite et continuité\hfill\pageref{tdlim}
+    \item Ensemble et dénombrement\hfill\pageref{tdEns}
+\end{enumerate}
+\include{Sections/tdLim}
+%--------------------------------------------
+% REMISE EN FORME DES SOUS-SOUS-SECTIONS  
+%--------------------------------------------
+
+% section = exercices
+\renewcommand{\thesection}{Exercice~\arabic{section}}
+% sous-section = question
+\renewcommand{\thesubsection}{Question~\arabic{subsection}}
+%--------------------------------------------
+
+\include{Sections/tdEns}
+
+\newpage
+%--------------------------------------------
+% REMISE EN FORME DES SOUS-SOUS-SECTIONS  
+%--------------------------------------------
+
+% section = exercices
+\renewcommand{\thesection}{\arabic{section}}
+% sous-section = question
+\renewcommand{\thesubsection}{\arabic{subsection}}
+%--------------------------------------------
+\section{Bibliographie}
+\href{https://www.annales2maths.com/ts_exercices_rec1/}{Récurrence}
+\end{document}

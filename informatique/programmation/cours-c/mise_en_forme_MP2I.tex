@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE EN FORME DU TITRE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\titreCopie}[2]{
+\noindent
+\textsc{Lettres Philosophie}
+\hfill
+#2
+%\\%[0.4cm]
+\begin{center}
+\LARGE
+\hrule
+\vspace{.4cm}
+#1 \\[0.4cm]
+\hrule
+\end{center}
+\vspace*{0.4cm}
+}
+
+\newcommand{\titrecours}[1]{
+\noindent
+\begin{center}
+\LARGE
+\hrule
+\vspace{.4cm}
+#1 \\[0.4cm]
+\hrule
+\end{center}
+\vspace*{0.4cm}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE EN FORME DES PIEDS DE PAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtEndDocument{\label{lastpage}}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{ 
+Ryan Bouchou
+}
+\cfoot{}
+\rfoot{\thepage/\pageref{lastpage}}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhfoffset{0.7cm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REMISE EN FORME DES SOUS-SOUS-SECTIONS  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% section = exercices
+%\renewcommand{\thesection}{\centering \arabic{section}}
+% sous-section = question
+%renewcommand{\thesubsection}{\arabic{subsection}}
+
+\newcommand{\ssection}[1]{%
+ 
+\begin{center}
+    \hline
+    
+    \section*{\centering\normalfont\scshape #1}
+    
+    \hline
+\end{center}
+  }
+
+
+\titleformat{\subsubsection}
+   {\normalfont\fontsize{13pt}{13pt}\selectfont\bfseries}% apparence commune au titre et au numéro
+   {\thesubsubsection}% apparence du numéro
+   {1em}% espacement numéro/texte
+   {}% apparence du titre
+
+\titleformat{\subsubsubsection}
+   {\normalfont\fontsize{11pt}{12pt}\selectfont\bfseries}% apparence commune au titre et au numéro
+   {\thesubsubsubsection}% apparence du numéro
+   {1em}% espacement numéro/texte
+   {}% apparence du titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISE EN FORME DU CODE AVEC MINTED
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%pour le style des numéros de ligne minted
+\renewcommand{\theFancyVerbLine}{\sffamily
+\textcolor{expli}{\scriptsize
+\oldstylenums{\arabic{FancyVerbLine}}}}
+
+%pour éviter l'italique 
+%car apparaissaient en italique à la fois les commentaires et les includes
+\newtoggle{inminted}
+\AtBeginEnvironment{minted}{\let\itshape\relax}
+
+%paramètres pour le c
+\setminted[c]{
+	%--fond et cadre	
+	bgcolor = black!3!white,
+	frame = leftline,
+	framesep = 6pt,
+	rulecolor= expli,
+	%--numéro de ligne
+	linenos=true,
+	numbersep=4pt,
+	%stepnumber=2,
+	xleftmargin=20pt,%pour que les chiffres débordent pas
+	%--découpage des longues lignes
+	breaklines=true,
+	%--tabulations
+	tabsize=2,
+	}
+
+%%
+\setminted[csyntax]{
+	%--fond et cadre	
+	bgcolor = black!3!white,
+	frame = leftline,
+	framesep = 6pt,
+	rulecolor= expli,
+	%--numéro de ligne
+	linenos=false,
+	numbersep=4pt,
+	%stepnumber=2,
+	xleftmargin=20pt,%pour que les chiffres débordent pas
+	%--découpage des longues lignes
+	breaklines=true,
+	%--tabulations
+	tabsize=2,
+	}
+
+%paramètres pour le ocaml
+\setminted[ocaml]{
+	%--fond et cadre	
+	%bgcolor = black!3!white,
+	frame = leftline,
+	framesep = 6pt,
+	rulecolor= expli,
+	%--numéro de ligne
+	linenos=true,
+	numbersep=4pt,
+	%stepnumber=2,
+	xleftmargin=20pt,%pour que les chiffres débordent pas
+	%--découpage des longues lignes
+	breaklines=true,
+	%--tabulations
+	tabsize=2,
+	}
+
+ %paramètres pour le ocaml
+\setminted[bash]{
+	%--fond et cadre	
+	bgcolor = black!3!white,
+	frame = leftline,
+	framesep = 6pt,
+	rulecolor= expli,
+	%--numéro de ligne
+	linenos=true,
+	numbersep=4pt,
+	%stepnumber=2,
+	xleftmargin=20pt,%pour que les chiffres débordent pas
+	%--découpage des longues lignes
+	breaklines=true,
+	%--tabulations
+	tabsize=2,
+	}
+
+
+
+
+
+

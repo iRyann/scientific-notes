@@ -1,0 +1,553 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+
+%%%%%%%%%%%%%%%%%%%%%% LES PACKAGES
+\input{packages_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%% MISE EN FORME
+\input{mise_en_forme_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LA PALETTE DE COULEURS
+\input{palette_aef.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES COMMANDES 
+\input{commandes_MP2I.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%% LES "BOITES"
+\newenvironment{s}{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Syntaxe}}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{df}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Définition:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+  
+\newenvironment{rp}[1]{%
+  \vspace*{0.5cm}
+  \thmbox[M]{\textbf{Rappel:} #1}%
+  \hspace*{-1.5em}\slshape\ignorespaces%
+  }
+  {%
+  \endthmbox\vspace*{1ex}%
+  }
+
+\PassOptionsToPackage{svgnames}{xcolor}
+
+\usepackage{tcolorbox}
+
+
+
+\renewcommand*\contentsname{Sommaire}
+
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{fancy} %active les pieds de pages
+\tcbset{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{couv}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+OCaml est un langage de programmation qui peut être compilé et interprété. Manifestement, il est à la fois fonctionnel (ie que le calcul est considéré comme une évaluation successives de fonctions) et impératif. Il notamment porteur des caractéristiques suivantes:
+\begin{itemize}
+    \flch Garbage collection (GC) pour la gestion automatique de la mémoire. A intervalle régulier, l'algorithme de gestion automatique de la mémoire recycle les parties de la mémoire préalablement allouée puis inutilisées.
+    \flch Polymorphisme paramétrique , qui permet la construction d'abstractions qui fonctionnent sur différents types de données.
+    \flch Bon support pour la programmation immuable , c'est-à-dire la programmation sans effectuer de mises à jour destructives des structures de données.
+    \flch Typage inféré par le compilateur : vous n'avez donc pas besoin d'annoter chaque variable de votre programme avec son type. Au lieu de cela, les types sont déduits en fonction de la façon dont une valeur est utilisée.
+    \flch Programmation orienté objet, et récursive.
+\end{itemize}
+
+\subsection{La compilation à partir d'un fichier source}
+On se muni d'un compilateur \textit{ocamlc}, et on rédige son code dans un ficher \textit{source.ml}. Alors, la commande UNIX pour compiler son fichier et l'exécuter est la suivante:
+\begin{s}
+    ocamlc source.ml - o executable\\
+    ./executable 
+\end{s}
+
+\subsection{L'usage d'un système interactif:}
+En utilisant un interpréteur lancé dans le shell, l'utilisateur rédige ses expressions Ocaml sur les lignes initiées par \#, qui sont compilées à la volée, exécutées, et dont la résultante s'affiche en dessous.
+\begin{itemize}
+    \flch Pour accéder à l'interpréteur: \textit{utop}
+    \flch Au sein de l'interpréteur:
+    \begin{itemize}
+        \item Implémenter une définition: \textit{definition;;}
+        \item Importer un fichier source: \textit{$\#$use "source.ml";;}
+        \item Sortir de l'interpréteur: \textit{exit 0;;}
+    \end{itemize}
+\end{itemize}
+\noindent
+Les phrases Ocaml sont des expressions simples, ou bien des définitions d'identifiants par le biais du mot-clé \mintinline{ocaml}{let}.
+\subsubsection*{Exemple}
+\begin{minted}{ocaml}
+    # 1 + 2 * 3;;
+    - : int = 7
+    # let pi = 4.0 *. atan 1.0;;
+    val pi : float = 3.14159265358979312
+\end{minted}
+
+\newpage
+\section{Expression en OCaml}
+\subsection{Définitions}
+En OCaml, les définitions ont une portée bien précise, caractérisée par la construction \mintinline{ocaml}{let x=content in e} où la valeur de localité de \mintinline{ocaml}{x} est l'expression \mintinline{ocaml}{e}
+\subsubsection{Non mutables}
+La définition d'identifiants comme vu précédemment met en lumière trois éléments. D'abord que la \textbf{précision des types est facultative}. Ensuite, qu'\textbf{une déclaration requiert dans le même temps une affectation}. Enfin, qu'\textbf{une telle déclaration n'est pas modifiable}.
+
+\begin{rp}{Nuance dans l'affectation}
+    The \mintinline{ocaml}{let} binding is not an assignment, it introduces a new identifier with a new scope.\\
+    Le nom d'une variable doit commencer par une minuscule
+\end{rp}
+\subsubsection{Mutables: Les références}
+On peut définir une variable mutable en utilisant le mot-clé \mintinline{ocaml}{ref}. Dès lors, on se munit de la syntaxe suivante:
+\begin{s}
+    \mintinline{ocaml}{let x = ref content} pour déclarer une variable mutable \mintinline{ocaml}{x}\\
+    \mintinline{ocaml}{!x} pour accéder à la valeur \mintinline{ocaml}{content}\\
+    \mintinline{ocaml}{x:=new_content} pour modifier la valeur de \mintinline{ocaml}{x}
+\end{s}
+
+\subsection{Les fonctions}
+
+\subsubsection{Définition usuelle}
+Pour définir une fonction on utilise la syntaxe suivante: 
+\begin{minted}{ocaml}
+let nom (arg_1 : type_1) ... (arg_n : type_n) : type = expression
+\end{minted}
+où\begin{itemize}
+    \flch \textit{nom} est identificateur
+    \flch $type_i$ est le type de l'argument
+    \flch \textit{type} est le type de sortie de la fonction
+\end{itemize}
+
+\subsubsection{Fonctions anonymes}
+En OCaml, on peut écrire une fonction comme une simple expression. C'est à dire sans lui donner de nom, et sans \mintinline{ocaml}{let}. Pour cela, on utilise la syntaxe suivante:
+ \begin{minted}{ocaml}
+fun (arg_1 : type_1) ... (arg_n : type_n) : type -> expression
+\end{minted}
+\subsubsection{Exemple}
+\begin{minted}{ocaml}
+    # let compose f g = fun x -> f (g x);;
+    val compose : ('a -> 'b) -> ('c -> 'a) -> 'c -> 'b = <fun>
+\end{minted}  
+\subsubsection{Fonctions récursives}
+Au contraire des langages impératifs, où l'appel de fonctions est coûteux (notamment spatialement, avec une accumulation des appels dans la piles ; et subséquemment, une saturation de celle-ci), les langages fonctionnels sont spécifiquement propices aux définitions récursives. Ainsi, lorsque l'on souhaite appeler une fonction dans le corps de celle-ci sur une instance différentes, il suffit d'adjoindre le mot-clé \mintinline{ocaml}{rec} à \mintinline{ocaml}{let}\\
+
+\noindent
+\textbf{Exemple}\\
+Amusons-nous à calculer la suite de Fibonacci, en version impérative et en version récursive.\\[0.5cm]
+\noindent
+\begin{minipage}[t]{0.45\textwidth}
+\begin{minted}{ocaml}
+let fibo_imp ( n : int ) : int =
+    let a = ref 1 in
+    let b = ref 1 in 
+    for i=0 to (n-1) do
+        let temp = (!b) in
+        b:=(!a)+(!b);
+        a:=temp;
+    done;
+    (!b)
+\end{minted}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{minted}{ocaml}
+let rec fibo_rec ( n : int ) : int =
+    if n=0 || n+1 then 1 
+    else fibo_rec (n-1) + fibo_rec (n-2)
+\end{minted}
+\end{minipage}
+\vspace*{0.5cm}
+\noindent \\
+Une programmation récursive nous épargne 2 références, et s'avère beaucoup plus aisé à implémenter (quoi qu'il ne faille pas négliger de manière générale la complexité d'un programme au profit de la rapidité de son implémentation).
+
+\subsubsection{Fonctions mutuellement récursives}
+Plusieurs fonctions sont dites mutuellement récursives lorsqu'elles s'appellent de façon croisées.
+\begin{s}
+    \begin{minted}{ocaml}
+let rec f_1 (a1 : t1 ) ... (a_n : t_n) : type_1 = e1
+    and f_2 (b1 : t1 ) ... (b_n : t_n) : type_2 = e2
+    ...
+    and f_n (o1 : t1 ) ... (o_n : t_n) : type_n = en
+\end{minted}
+\(\forall i \in [1..n], e_i \) est une expression qui 
+peut faire intervenir, \(\forall j \in [1..n],\) 
+$f_j$ et les $arg_j$.\\
+\end{s}
+
+\noindent
+\textbf{Exemple}
+\begin{minted}{ocaml}
+let rec p_n ( nn : int ) : int =
+(* Calcule les termes de la suites p(n) *)
+if nn = 0 then 3
+else 2*(q_n (nn-1) )
+
+and q_n ( nn : int ) : int =
+(* Calcule les termes de la suites q(n) *)
+if nn = 0 then 4
+else 7*(p_n (nn-1)) + 6
+
+let pq ( n : int ) : int*int = ( (p_n n),(q_n n) )
+(* Affiche le couple h (p(n),q(n)) *)
+\end{minted}
+
+
+\subsubsection{Polymorphisme fonctionnel}
+Il est possible de définir des types paramétrés (cf partie Polymorphisme paramétrique); dès lors, il parait tout à fait acceptable que les fonctions admettent des arguments ayant pour type des variables.
+\begin{minted}{ocaml}
+# let id ( x : 'a ) : 'a = x;;
+val id : 'a -> 'a = <fun>
+\end{minted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{L'alternative} Comme son nom l'indique, elle est l'équivalent du if else en C. La syntaxe est la suivante:\\[0.5cm]
+\begin{minipage}{0.45\textwidth}
+\begin{minted}{ocaml}
+    if c_1 then e_1
+    else if c_2 then e_2
+    [...]
+    else e_3
+\end{minted}    
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+    \begin{itemize}
+        \flch Les \textit{$c_i$} sont des expressions booléennes.
+        \flch Les \textit{$e_i$} sont des expressions de même type.
+    \end{itemize}    
+\end{minipage}
+
+
+\subsection{Définition de types}
+
+
+
+\subsubsection{Types simples}
+    \begin{itemize}
+        \flch Types prédéfinis: int / float / string / unit / char / bool
+        \flch Variable de type: \mintinline{ocaml}{'a} signifie que l'objet caractérisé par un tel type  peut prendre n'importe quel type prédéfinis.
+    \end{itemize}
+
+\subsubsection{Définition locale}
+Lorsque l'on implémente des types abstraits, il peut être judicieux de renommer leurs types représentatifs, qu'ils soient paramétrés ou non, comme l'on réaliserait des \mintinline{c}{typedef} en C.
+\begin{s}
+    \begin{minted}{ocaml}
+    let identificateur in expression_de_type
+    \end{minted}
+\end{s}
+           
+\subsubsection{Types produits}
+Il s'agit du type d'un n uplet: \((t_1*t_2*\dots*t_n)\)  avec  \(\forall i \in [1..n]\) un type possiblement différent.\\
+Comme chaque champ n'a pas de nom, on accède à ceux-ci grâce à la syntaxe suivante:
+\begin{s}
+    \begin{minted}{ocaml}
+        let c=(a,b,...,x) in expression
+    \end{minted}
+\end{s}
+
+        
+\subsubsection{Types fonctionnels}
+Si on considère la fonction \mintinline{ocaml}{fun (x : tx) (y : ty) (z : tz ) ... : tf -> expression}\\
+Alors, elle a pour type: $t_x \to t_y \to t_z \to ... \to t_f$ \\
+\noindent
+\begin{tcolorbox}
+    Rappel : Une fonction à n argument associe au premier une fonction des n-1 restants.
+\end{tcolorbox}
+ 
+ 
+  
+ 
+   
+\subsubsection{Définir un type paramétré}
+\begin{s}
+    \begin{minted}{ocaml}
+        type ('a1,'a2,...,'an) nomdutype = exp_de_type
+    \end{minted}
+\end{s}
+        
+
+\subsubsection{Exemple}
+\begin{minted}{ocaml}
+        type 'a couple = ('a)*('a)
+        let couple : bool couple = (true,false)
+\end{minted}
+        
+    
+\subsubsection{Définir un type somme}
+\begin{s}
+     \begin{minted}{ocaml}
+    type id = Constructeur_1 | ... | Constructeur_n
+    
+    type id =
+        | Constructeur_1
+        | Constructeur_2 of exp_de_type
+    
+    type ('a,'b,...,'n) id =
+        | Constructeur_1 of exp_de_type
+        | Constructeur_2
+    \end{minted}
+\end{s}
+\noindent  
+Au début de chacune des sections, séparées par des |, se trouve un constructeur. On peut les nommer comme on veut, tant que leur nom commence par une capitale.\\
+Si un constructeur peut être utilisé pour définir une valeur, il est suivi de \mintinline{ocaml}{of} et d'une expression de type (potentiellement paramétrée).
+
+\subsubsection{Type somme paramétré prédéfini}
+        
+Le type 'a option est déjà défini en OCaml. Il contient le valeur None, qui signifie "pas de donnée" ou une valeur de type 'a en-capsulée dans le constructeur Some.\\
+Ce type peut servir à stocker des données incomplètes (comme les notes d'une classe à un devoir où None est la note d'un absent) ou à gérer des fonctions partielles (on renvoie None quand la fonction n'est pas définie sur les valeurs passées en argument, comme la moyenne d'une liste vide). 
+
+\begin{s}
+     \begin{minted}{ocaml}
+    type 'a option = 
+        | None 
+        | Some of 'a
+\end{minted}
+\end{s}
+
+\subsubsection{Type somme paramétré et récursif}
+Exemple d'une pile:
+\begin{minted}{ocaml}
+    type 'a pile =
+    | PileVide
+    | PileNonVide of ('a*('a pile))
+\end{minted}
+        
+        
+       
+        
+    
+\subsubsection{Types enregistrements}
+\noindent
+Les types produits, appelés aussi types enregistrement ou record en anglais, sont l'équivalent des structures en C : ils permettent de rassembler des données de types différents, comme un n-uplet, en leur donnant un nom (avantage par rapport au n-uplet : on n'a plus besoin de connaître l'ordre des données, seulement le nom des champs associés).
+    
+\begin{itemize}
+    \item Nouvelle expression de type associée
+    On définit un type produit grâce à la syntaxe suivante:
+    \begin{minted}{ocaml}
+    type identificateur = {nom_du_champ_1 : type_1 ; ... ; nom_du_champ_n : type_n }
+    \end{minted}
+    \item Définition d'un type enregistrement (paramétré)
+    \begin{minted}{ocaml}
+    type ('a, ..., 'n) identificateur = {nom_du_champ_1 : type_1 ; ... ; nom_du_champ_n : type_n }
+    \end{minted}
+    \item Expressions associées : définir une valeur de ce nouveau type produit
+    \begin{minted}{ocaml}
+    let identificateur : nom_du_type = {nom_du_champ_1 = val1 ; ... ; nom_du_champ_n = valn }
+    \end{minted}
+    \item Accès à un champ d'une valeur de ce nouveau type produit
+    \begin{minted}{ocaml}
+    identificateur.nom_du_champ_n
+    \end{minted}
+    \item Modification d'un champ mutable 
+    \begin{minted}{ocaml}
+    identificateur.nom_du_champ<-content;
+    \end{minted}
+\end{itemize}
+
+\section{Filtrage}
+\subsection{Principe}
+Un filtrage prend la forme suivante:
+\begin{minted}{ocaml}
+match valeur with
+    | motif    ->  résultat
+    | motif    ->  résultat
+    ...    
+\end{minted}
+On veillera à faire des filtrages non redondants (ce qui déclenche un warning de OCaml, comme vu en cours) et exhaustif, c'est-à-dire dont les motifs couvrent toutes les valeurs possibles du type filtré, quitte à mettre des failwith pour les valeurs non conformes aux hypothèses.\\
+\noindent
+On voit qu'on peut utiliser le tiret du bas pour éviter de nommer une variable non utilisée, ou pour désigner "toutes les autres valeurs".
+\newpage
+\subsection{Exemples}
+\begin{minted}{ocaml}
+let compte (x:int) : string = 
+match x with 
+    | 1 -> "un" 
+    | 2 -> "deux" 
+    | _ -> "bcp"
+
+let compte_couple (c:int*int) : string = 
+match c with 
+    | 1,_  -> "un peu" 
+    | 2,_ -> "deux peu" 
+    | 4,3 -> "quatre trois"
+    | _,3  -> "trop"  
+    | _ -> "bcp"
+
+ match identificateur with
+    | {nom_du_champ_1 = val_1 ; ... ; nom_du_champ_n = val_n} -> expression
+    | {_;nom_du_champ_2 = val2 ; _ ;...; _} as identificateur -> expression
+\end{minted}
+
+
+    
+   
+\subsection{Combinaison de motifs}
+     
+La combinaison de plusieurs motifs permet d'obtenir un nouveau motif qui pourra déstructurer une valeur selon l'un ou l'autre de ses motifs originaux. La forme syntaxique est la suivante :
+\begin{center}
+ $|p_1 | ...| p_n $
+\end{center}
+
+\noindent
+Elle construit un nouveau motif par combinaison des motifs $p_1$, ...et $p_n$. La seule contrainte forte est de refuser tout nommage à l'intérieur de ces motifs.
+Donc chacun d'eux ne devra contenir que des valeurs constantes ou le motif universel. \\
+L'exemple suivant montre comment vérifier qu'un caractère est une voyelle.
+\begin{minted}{ocaml}
+# let est_une_voyelle c = match c with 
+ |'a' | 'e' | 'i' | 'o' | 'u' | 'y' -> true 
+ | _ -> false 
+\end{minted}
+
+\subsection{Nommage d'une valeur filtrée}
+ 
+Lors d'un filtrage de motif, il est parfois pratique de nommer tout ou partie du motif.\\
+La forme syntaxique suivante introduit le mot clé as qui associe un nom à un motif. 
+ 
+\begin{center}
+    \mintinline{ocaml}{identificateur as new_id}
+\end{center}
+\noindent
+Ceci est utile lorsqu'on a besoin de déstructurer une valeur tout en la conservant dans son intégralité.\\
+Dans l'exemple suivant, la fonction min-rat rend le plus petit rationnel d'un couple de rationnels. 
+Ces derniers sont représentés par un couple numérateur et dénominateur.
+
+\begin{minted}{ocaml}
+let min_rat cr = match cr with
+|((_,0),c2) ->  c2
+| (c1,(_,0)) ->  c1
+| (((n1,d1) as r1), ((n2,d2) as r2)) ->  
+     if (n1 *  d2 ) < (n2 * d1) then r1 else r2  
+\end{minted}
+\noindent
+Pour comparer deux rationnels, il est nécessaire de les déstructurer pour pouvoir nommer leur numérateur 
+et leur dénominateur (n1, n2, d1 et d2), mais il faut rendre le couple initial (r1 ou r2). 
+La construction as nous permet ce nommage de parties d'une même valeur. 
+Cela évite de devoir reconstruire le rationnel retourné en résultat.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newpage
+\section{Les Modules}
+\subsection{Module List}
+\subsubsection{Le type}
+Il existe un module prédéfini en OCaml qui implémente le type abstrait des listes chaînées. \warning Cette structure est non mutable. On présente l'implémentation de son type. 
+
+\begin{s}
+\noindent
+\begin{minted}{ocaml}
+type 'a t = 'a list = 
+|[]                     (*représente la liste vide*)
+|(::) of 'a * 'a list   (*constructeur "cons" qui permet de joindre un élément, à sa gauche, ainsi qu'une liste (éventuellement la liste vide) à sa droite. Il crée une nouvelle liste pour représenter la résultante de cette opération.*)
+\end{minted}
+\end{s}
+
+\subsubsection{Méthodes}
+On peut utiliser un certains nombres de méthodes dont on obtiendra une liste exhaustive sur la documentation. On utilise ces méthodes avec la syntaxe \mintinline{ocaml}{List.methode ...}
+\begin{itemize}
+    \flch \mintinline{ocaml}{length : 'a list -> int}
+    \flch \mintinline{ocaml}{hd : 'a list -> 'a} Return the first element of the given list.
+    \flch \mintinline{ocaml}{rev : 'a list -> 'a list}
+    \flch \mintinline{ocaml}{init : int -> (int -> 'a) -> 'a list} \\init len f is [f 0; f 1; ...; f (len-1)], evaluated left to right.
+    \flch \mintinline{ocaml}{rev_append : 'a list -> 'a list -> 'a list} Renverse l1 dans l2
+    \flch \mintinline{ocaml}{fold_left : ('a -> 'b -> 'a) -> 'a -> 'b list -> 'a}\\ fold\_left f init [b1; ...; bn] is f (... (f (f init b1) b2) ...) bn.
+\end{itemize}
+\subsubsection{Filtrage}
+\begin{minted}{ocaml}
+let f ( l : 'a list )  : 'a =
+    match l with 
+    | [] -> ...
+    | x :: ll -> ...
+
+let f2 ( l1 : 'a list ) ( l2 : 'b list ) = 
+    match l1, l2 with
+    | [], []        -> ...
+    | [], _         -> ...
+    | _, []         -> ...
+    | x::q, y::p    -> ...
+\end{minted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Array}
+Il existe un modèle prédéfini en OCaml pour implémenter les tableaux, qui sont des structures abstraites statiques et cette fois-ci mutables. Il y a nécessairement homogénéité des éléments, et l'accès à ceux-ci est en O(1).
+\subsubsection{Principe}
+Les tableaux sont indicés par $[1..n], n$ étant la taille de celui-ci. \\
+\begin{minipage}{0.55\textwidth}
+\begin{s}
+    \mintinline{ocaml}{  [||]} est le tableau vide\\
+    \mintinline{ocaml}{;} est le sépérateur des éléments 
+\end{s}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{s}
+    \mintinline{ocaml}{   t.(i)} accès\\
+    \mintinline{ocaml}{t.(i)<-content} affectation
+\end{s}
+\end{minipage}
+
+\subsubsection{Méthodes}
+On peut utiliser un certains nombres de méthodes dont on obtiendra une liste exhaustive sur la documentation. On utilise ces méthodes avec la syntaxe \mintinline{ocaml}{Array.methode ...}
+\begin{itemize}
+    \flch \mintinline{ocaml}{make : int -> 'a -> 'a array}
+    \flch \mintinline{ocaml}{length : 'a array -> int} 
+    \flch \mintinline{ocaml}{init : int -> (int -> 'a) -> 'a array}
+    \flch \mintinline{ocaml}{copy : 'a array -> 'a array}
+\end{itemize}
+\subsubsection{Matrices}
+\warning La méthode qui consiste à utiliser \mintinline{ocaml}{make : int -> 'a -> 'a array} avec une nouvelle commande Array.make en facteur d'initialisation ne produit pas l'effet attendu. Et pour cause, toutes les cases du tableau vont pointer vers le tableau d'initialisation en réalité unique, et stocké à une et une seule adresse. En conséquence de quoi, nous n'aurons fait que le passer par valeur dans chacune des cases.\\
+Pour remédier à cela, il faudrait initialiser chacune des cases du tableau "principal" en réalisant un Array.make (à l'aide d'un for). Sinon, on peut utiliser le module déjà existant:
+\begin{s}
+    \mintinline{ocaml}{make_matrix : int -> int -> 'a -> 'a array array}
+\end{s}
+\subsubsection{Chaînes de caractères}
+On accède aux éléments d'une chaines de caractères \mintinline{ocaml}{let chaine = "coucou hibou"} comme suit: \mintinline{ocaml}{chaine.[i]} si tant est que i soit un indice valide bien évidemment.\\
+Les chaines de caractères, dans les dernières versions d'OCaml, ne sont plus des objets mutables ; et subséquemment, il faut utiliser le module \textbf{Bytes} pour les manipuler sous forme modifiable.\\[0.5cm]
+On donne les méthodes suivantes:\\
+
+\begin{minipage}{0.4\textwidth}
+    \begin{itemize}
+    \flch \mintinline{ocaml}{of_string : string -> bytes}
+    \flch \mintinline{ocaml}{get : bytes -> int -> char}\\ 
+    get s n returns the byte at index n in argument s
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+    \flch \mintinline{ocaml}{to_string : bytes -> string}
+    \flch \mintinline{ocaml}{set : bytes -> int -> char -> unit}\\
+    set s n c modifies s in place, replacing the byte at index n with c.
+\end{itemize}
+\end{minipage}
+\subsection{Tables de hachage}
+On utilise le module \textbf{Hashtbl}
+\subsubsection{Principe}
+En cours d'écriture...
+\subsubsection{Méthodes}
+\begin{itemize}
+    \flch \mintinline{ocaml}{create : ?random:bool -> int -> ('a, 'b) t}
+    \flch \mintinline{ocaml}{add : ('a, 'b) t -> 'a -> 'b -> unit}
+    \flch \mintinline{ocaml}{find : ('a, 'b) t -> 'a -> 'b}\\
+    Hashtbl.find tbl x retourne la valeur associée à la clé x in tbl, ou raises Not\_found si aucun enregistrement avec cette clé n'est présent dans tbl.
+    \flch \mintinline{ocaml}{mem : ('a, 'b) t -> 'a -> bool}\\
+    Hashtbl.mem tbl x retourne si la clé x est présente dans tbl.
+    
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Programmation orienté objet}
+En cours d'écriture...
+
+
+
+
+\end{document}

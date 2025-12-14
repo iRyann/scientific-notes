@@ -1,0 +1,72 @@
+\noindent\textbf{Correction \cref{exo:1}}
+\begin{itemize}
+    \item \textit{Initialisation (\(n = 1\)):}
+\[1^2 = \frac{1(1+1)(2\cdot 1+1)}{6}\]
+    \item \textit{Hérédité:} Supposons $\mathcal{P}_k$ pour un entier positif \(k\), i.e.,
+\[1^2 + 2^2 + 3^2 + \ldots + k^2 = \frac{k(k+1)(2k+1)}{6}.\]
+
+On veut montrer la propriété au rang \(k+1\):
+\begin{align*}
+1^2 + 2^2 + 3^2 + \ldots + k^2 + (k+1)^2 &= \frac{k(k+1)(2k+1)}{6} + (k+1)^2 \\
+&= \frac{k(k+1)(2k+1) + 6(k+1)^2}{6} \\
+&= \frac{(k+1)(k+2)(2k+3)}{6}.
+\end{align*}
+\end{itemize}
+
+
+
+
+Donc, comme $\mathcal{P}_0$ est vraie et que pour tout entier positif \(n\), $\mathcal{P}_n$ entraine $\mathcal{P}_{n+1}$, on en déduit par récurrence que pour tout $n\in\NN$, $\mathcal{P}_n$ est vraie.\\[0.5cm]
+
+\noindent\textbf{Correction \cref{exo:2}}\\
+Montrons par récurrence sur $n\in\NN$ la formule du binome de Newton. Considérons deux réels \( a \) et \( b \),
+$$
+\mathcal{P}_n : "(a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k "
+$$
+
+\begin{itemize}
+    \item \textit{Initialisation (\(n = 0\):)}
+\[
+(a + b)^0 = \binom{0}{0} a^0 b^0 = 1.
+\]
+    \item \textit{Hérédité:} Supposons $\mathcal{P}_k$ pour un entier positif \( k \), i.e.,
+\[
+(a + b)^k = \sum_{i=0}^{k} \binom{k}{i} a^{k-i} b^i.
+\]
+
+On veut montrer la propriété au rang \( k+1 \):
+\begin{align*}
+(a + b)^{k+1} &= (a + b)(a + b)^k \\
+&= (a + b) \sum_{i=0}^{k} \binom{k}{i} a^{k-i} b^i \\
+&= \sum_{i=0}^{k} \binom{k}{i} a^{k+1-i} b^i + \sum_{i=0}^{k} \binom{k}{i} a^{k-i} b^{i+1} \\
+&= \binom{k}{0} a^{k+1} b^0 + \sum_{i=1}^{k-1} \binom{k}{i} a^{k+1-i} b^i + \binom{k}{k} a^0 b^{k+1} \\
+&= \binom{k+1}{0} a^{k+1} b^0 + \sum_{i=1}^{k-1} \binom{k+1}{i} a^{k+1-i} b^i + \binom{k+1}{k+1} a^0 b^{k+1}.
+\end{align*}
+\end{itemize}
+Donc, comme $\mathcal{P}_0$ est vraie et que pour tout entier positif \(n\), $\mathcal{P}_n$ entraine $\mathcal{P}_{n+1}$, on en déduit par récurrence que pour tout $n\in\NN$, $\mathcal{P}_n$ est vraie.\\[0.5cm]
+\noindent\textbf{Correction \cref{exo:5}}\\
+On utilise l'identité remarquable $(1+n)^2=1+2n+n^2$\\[0.5cm]
+\noindent\textbf{Correction \cref{exo:6}}\\
+On part de $\mathcal{P}_n$, on multiplie par $(1+a)$ et on utilise le fait que $a>0$.\\[0.5cm]
+\noindent\textbf{Correction \cref{exo:7}}\\
+Pour l'hérédité:
+\begin{align*} 
+u_n\leq u_{n+1} &\ssi u_n+1 \leq u_{n+1}+1 \\
+&\ssi \sqrt{u_n+1} \leq \sqrt{u_{n+1}+1} &~croissance~de~x\mapsto\sqrt{x}\\
+&\ssi u_{n+1} \leq u_{n+2}
+\end{align*}
+
+\noindent\textbf{Correction \cref{exo:8}}\\
+Pour l'hérédité:\\
+Soit un entier $n\geq1$. On suppose $\mathcal{P}_n$ vraie : $S_n = \displaystyle \sum_{k=1}^{n} k^3 = 1^3+2^3+\ldots+n^3 = \dfrac{n^2(n+1)^2}{4}$
+\begin{align*}
+S_{n+1}&=1^3+2^3+\ldots+n^3+(n+1)^3 \\
+&=S_n+(n+1)^3 \\
+&=\dfrac{n^2(n+1)^2}{4}+(n+1)^3\\
+&=(n+1)^2 \times \left(\dfrac{n^2}{4}+n+1\right) \\
+&=(n+1)^2\times \dfrac{n^2+4n+4}{4} \\
+&=(n+1)^2\times \dfrac{(n+2)^2}{4}
+\end{align*}
+
+\noindent\textbf{Correction \cref{exo:9}}\\
+Question 4: $4^n+1 \equiv 2~[3]$
